@@ -16,7 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="teraformer-game"
+run/main_scene="res://MainMenu.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/borderless=true
+window/size/fullscreen=true
 
 [rendering]
 
