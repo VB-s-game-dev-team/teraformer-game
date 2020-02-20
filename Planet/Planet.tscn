@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Planet/background.png" type="Texture" id=1]
+[ext_resource path="res://Planet/Container.gd" type="Script" id=2]
+[ext_resource path="res://fonts/ARIAL.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://Planet/base.png" type="Texture" id=4]
+[ext_resource path="res://Planet/station.png" type="Texture" id=5]
+[ext_resource path="res://Planet/Planet.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="Planet" type="Control"]
+margin_left = -1152.0
+margin_top = -1152.0
+margin_right = 1152.0
+margin_bottom = 1152.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetRotationNode" type="Node2D" parent="."]
+position = Vector2( 1152, 1152 )
+script = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="PlanetRotationNode"]
+position = Vector2( -16, 0 )
+scale = Vector2( 4.4, 4.4 )
+texture = ExtResource( 1 )
+
+[node name="Base" type="Control" parent="PlanetRotationNode"]
+margin_left = -256.0
+margin_top = -896.0
+margin_right = 256.0
+margin_bottom = -640.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BaseTexture" type="TextureRect" parent="PlanetRotationNode/Base"]
+margin_right = 512.0
+margin_bottom = 256.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopButton" type="Button" parent="PlanetRotationNode/Base"]
+margin_left = 16.0
+margin_top = 144.0
+margin_right = 240.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 1 )
+text = "Shop"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MineStation" type="Control" parent="PlanetRotationNode"]
+margin_left = -896.0
+margin_top = 128.0
+margin_right = -640.0
+margin_bottom = 384.0
+rect_rotation = -90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MineTexture" type="TextureRect" parent="PlanetRotationNode/MineStation"]
+margin_top = -3.05176e-05
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MineButton" type="Button" parent="PlanetRotationNode/MineStation"]
+margin_right = 256.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 1 )
+text = "Mine Station"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BattleStation" type="Control" parent="PlanetRotationNode"]
+margin_left = 896.0
+margin_top = -128.0
+margin_right = 1152.0
+margin_bottom = 128.0
+rect_rotation = 90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BattleTexture" type="TextureRect" parent="PlanetRotationNode/BattleStation"]
+margin_top = -3.05176e-05
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BattleButton" type="Button" parent="PlanetRotationNode/BattleStation"]
+margin_right = 256.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 1 )
+text = "Battle Station"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TRStation" type="Control" parent="PlanetRotationNode"]
+margin_left = 128.0
+margin_top = 896.0
+margin_right = 384.0
+margin_bottom = 1152.0
+rect_rotation = -180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TRTexture" type="TextureRect" parent="PlanetRotationNode/TRStation"]
+margin_top = -3.05176e-05
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TRButton" type="Button" parent="PlanetRotationNode/TRStation"]
+margin_top = 6.10352e-05
+margin_right = 256.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 1 )
+text = "TR Station"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1152, 384 )
+current = true
+[connection signal="button_down" from="PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
+[connection signal="button_down" from="PlanetRotationNode/MineStation/MineButton" to="." method="_on_MineButton_button_down"]
+[connection signal="button_down" from="PlanetRotationNode/BattleStation/BattleButton" to="." method="_on_BattleButton_button_down"]
+[connection signal="button_down" from="PlanetRotationNode/TRStation/TRButton" to="." method="_on_TRButton_button_down"]

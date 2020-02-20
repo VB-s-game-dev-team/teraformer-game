@@ -5,7 +5,7 @@
 [ext_resource path="res://fonts/ARIAL.TTF" type="DynamicFontData" id=3]
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 30
 font_data = ExtResource( 3 )
 
@@ -45,7 +45,7 @@ margin_top = 144.0
 margin_right = 403.0
 margin_bottom = 185.0
 size_flags_horizontal = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
