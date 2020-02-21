@@ -20,7 +20,7 @@ margin_bottom = 600.0
 texture = ExtResource( 3 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Container" type="VBoxContainer" parent="."]
 margin_left = 142.0
 margin_top = 170.0
 margin_right = 881.0
@@ -31,24 +31,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="TextureRect" parent="VBoxContainer"]
+[node name="Title" type="TextureRect" parent="Container"]
 margin_right = 739.0
 margin_bottom = 140.0
 texture = ExtResource( 4 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="Container"]
 margin_left = 325.0
 margin_top = 144.0
 margin_right = 413.0
 margin_bottom = 260.0
 size_flags_horizontal = 4
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Container/ButtonContainer"]
 margin_right = 88.0
 margin_bottom = 56.0
 text = "Play"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Container/ButtonContainer"]
 margin_top = 60.0
 margin_right = 88.0
 margin_bottom = 116.0
@@ -56,5 +56,5 @@ text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Container/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Container/ButtonContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
