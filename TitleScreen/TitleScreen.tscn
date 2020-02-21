@@ -43,7 +43,7 @@ margin_right = 413.0
 margin_bottom = 260.0
 size_flags_horizontal = 4
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_right = 88.0
 margin_bottom = 56.0
 text = "Play"
@@ -56,5 +56,5 @@ text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

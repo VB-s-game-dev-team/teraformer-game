@@ -3,7 +3,7 @@ extends MarginContainer
 func _on_QuitButton_pressed():
 	call_deferred("quit")
 
-func _on_Button_pressed():
+func _on_PlayButton_pressed():
 	switch_to_planet()
 
 func quit():
@@ -11,4 +11,3 @@ func quit():
 	
 func switch_to_planet():
 	get_parent().set_screen("Planet")
-
