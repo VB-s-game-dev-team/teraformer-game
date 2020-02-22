@@ -1,9 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://TitleScreen/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://TitleScreen/particle.png" type="Texture" id=2]
 [ext_resource path="res://TitleScreen/background.png" type="Texture" id=3]
 [ext_resource path="res://TitleScreen/title.png" type="Texture" id=4]
 [ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=5]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 200, 100, 1 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.1
+angular_velocity = 26.67
+angular_velocity_random = 0.14
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 10.0
+damping_random = 0.03
+scale = 0.5
+scale_random = 1.0
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -35,6 +53,14 @@ __meta__ = {
 margin_right = 739.0
 margin_bottom = 140.0
 texture = ExtResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="Container/Title"]
+position = Vector2( 370, 70 )
+amount = 50
+lifetime = 7.0
+visibility_rect = Rect2( -200, -100, 400, 200 )
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Container"]
 margin_left = 325.0
