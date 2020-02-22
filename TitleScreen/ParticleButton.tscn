@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://TitleScreen/ParticleEmitor.gd" type="Script" id=1]
+[ext_resource path="res://TitleScreen/particle.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 0.666667, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, -2.63889, 0, 0, Vector2( 0.98, 0 ), 0.0426139, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 41.5, 28, 0 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+angular_velocity = 400.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 3.0
+scale = 0.4
+scale_random = 1.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[node name="ParticleButton" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParticleEmitor" type="Particles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 5.0
+visibility_rect = Rect2( 0, 0, 0, 0 )
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+[connection signal="mouse_entered" from="." to="ParticleEmitor" method="_on_ParticleButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="ParticleEmitor" method="_on_ParticleButton_mouse_exited"]

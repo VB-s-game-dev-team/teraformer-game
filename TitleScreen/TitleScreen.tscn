@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://TitleScreen/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://TitleScreen/particle.png" type="Texture" id=2]
 [ext_resource path="res://TitleScreen/background.png" type="Texture" id=3]
 [ext_resource path="res://TitleScreen/title.png" type="Texture" id=4]
 [ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=5]
+[ext_resource path="res://TitleScreen/ParticleButton.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 1.0
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 5.0
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -20,40 +34,50 @@ margin_bottom = 600.0
 texture = ExtResource( 3 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 142.0
-margin_top = 170.0
-margin_right = 881.0
-margin_bottom = 430.0
+[node name="Container" type="VBoxContainer" parent="."]
+margin_left = 236.0
+margin_top = 189.0
+margin_right = 788.0
+margin_bottom = 411.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="TextureRect" parent="VBoxContainer"]
-margin_right = 739.0
-margin_bottom = 140.0
+[node name="Title" type="TextureRect" parent="Container"]
+margin_right = 552.0
+margin_bottom = 102.0
 texture = ExtResource( 4 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 325.0
-margin_top = 144.0
-margin_right = 413.0
-margin_bottom = 260.0
+[node name="TitleParticles" type="Particles2D" parent="Container/Title"]
+visible = false
+amount = 50
+lifetime = 5.0
+visibility_rect = Rect2( -1.2839, -1.52361, 553.72, 104.182 )
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Container"]
+margin_left = 232.0
+margin_top = 106.0
+margin_right = 320.0
+margin_bottom = 222.0
 size_flags_horizontal = 4
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="PlayButton" parent="Container/ButtonContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 88.0
 margin_bottom = 56.0
 text = "Play"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="QuitButton" parent="Container/ButtonContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 60.0
 margin_right = 88.0
 margin_bottom = 116.0
 text = "Quit"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Container/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Container/ButtonContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

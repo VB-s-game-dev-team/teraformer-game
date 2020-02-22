@@ -1,7 +1,12 @@
 extends MarginContainer
 
-func _on_QuitButton_pressed():
-	call_deferred("quit")
+var global_stuff: GlobalStuff
 
-func quit():
-	get_tree().quit()
+func _ready():
+	global_stuff = get_parent() as GlobalStuff
+
+func _on_QuitButton_pressed():
+	global_stuff.set_screen("")
+
+func _on_PlayButton_pressed():
+	global_stuff.set_screen("Planet")
