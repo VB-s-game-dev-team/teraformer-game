@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Planet/background.png" type="Texture" id=1]
-[ext_resource path="res://Planet/Container.gd" type="Script" id=2]
+[ext_resource path="res://Planet/PlanetRotationNode.gd" type="Script" id=2]
 [ext_resource path="res://fonts/ARIAL.TTF" type="DynamicFontData" id=3]
 [ext_resource path="res://Planet/base.png" type="Texture" id=4]
 [ext_resource path="res://Planet/station.png" type="Texture" id=5]
 [ext_resource path="res://Planet/Planet.gd" type="Script" id=6]
+[ext_resource path="res://BuildingSpot/BuildingSpot.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -26,7 +27,6 @@ position = Vector2( 1152, 1152 )
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="PlanetRotationNode"]
-position = Vector2( -16, 0 )
 scale = Vector2( 4.4, 4.4 )
 texture = ExtResource( 1 )
 
@@ -150,10 +150,162 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BuildingSpots" type="Node2D" parent="PlanetRotationNode"]
+
+[node name="BuildingSpot1" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -224.0
+margin_top = -1072.0
+margin_right = -64.0
+margin_bottom = -912.0
+
+[node name="BuildingSpot2" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -432.0
+margin_top = -848.0
+margin_right = -272.0
+margin_bottom = -688.0
+
+[node name="BuildingSpot3" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 64.0
+margin_top = -1072.0
+margin_right = 224.0
+margin_bottom = -912.0
+
+[node name="BuildingSpot4" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -224.0
+margin_top = -624.0
+margin_right = -64.0
+margin_bottom = -464.0
+
+[node name="BuildingSpot5" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 272.0
+margin_top = -848.0
+margin_right = 432.0
+margin_bottom = -688.0
+
+[node name="BuildingSpot6" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 64.0
+margin_top = -624.0
+margin_right = 224.0
+margin_bottom = -464.0
+
+[node name="BuildingSpot7" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 848.0
+margin_top = -304.0
+margin_right = 1008.0
+margin_bottom = -144.0
+rect_rotation = 90.0
+
+[node name="BuildingSpot8" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 1072.0
+margin_top = -80.0
+margin_right = 1232.0
+margin_bottom = 80.0
+rect_rotation = 90.0
+
+[node name="BuildingSpot9" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 848.0
+margin_top = 144.0
+margin_right = 1008.0
+margin_bottom = 304.0
+rect_rotation = 90.0
+
+[node name="BuildingSpot10" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 624.0
+margin_top = -80.0
+margin_right = 784.0
+margin_bottom = 80.0
+rect_rotation = 90.0
+
+[node name="BuildingSpot11" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 304.0
+margin_top = 848.0
+margin_right = 464.0
+margin_bottom = 1008.0
+rect_rotation = 180.0
+
+[node name="BuildingSpot12" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 80.0
+margin_top = 1072.0
+margin_right = 240.0
+margin_bottom = 1232.0
+rect_rotation = 180.0
+
+[node name="BuildingSpot13" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -144.0
+margin_top = 848.0
+margin_right = 16.0
+margin_bottom = 1008.0
+rect_rotation = 180.0
+
+[node name="BuildingSpot14" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = 80.0
+margin_top = 624.0
+margin_right = 240.0
+margin_bottom = 784.0
+rect_rotation = 180.0
+
+[node name="BuildingSpot15" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -848.0
+margin_top = 304.0
+margin_right = -688.0
+margin_bottom = 464.0
+rect_rotation = -90.0
+
+[node name="BuildingSpot16" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -624.0
+margin_top = 80.0
+margin_right = -464.0
+margin_bottom = 240.0
+rect_rotation = -90.0
+
+[node name="BuildingSpot17" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -1072.0
+margin_top = 80.0
+margin_right = -912.0
+margin_bottom = 240.0
+rect_rotation = -90.0
+
+[node name="BuildingSpot18" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+margin_left = -848.0
+margin_top = -144.0
+margin_right = -688.0
+margin_bottom = 16.0
+rect_rotation = -90.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1152, 384 )
 current = true
+
+[node name="LeftRotateButton" type="Button" parent="."]
+anchor_left = 0.292
+anchor_top = 0.139
+anchor_right = 0.292
+anchor_bottom = 0.139
+margin_left = -144.768
+margin_top = -16.256
+margin_right = -80.7681
+margin_bottom = 143.744
+text = "L"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightRotateButton" type="Button" parent="."]
+anchor_left = 0.292
+anchor_top = 0.139
+anchor_right = 0.292
+anchor_bottom = 0.139
+margin_left = 1039.23
+margin_top = -16.256
+margin_right = 1103.23
+margin_bottom = 143.744
+text = "R"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_down" from="PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
 [connection signal="button_down" from="PlanetRotationNode/MineStation/MineButton" to="." method="_on_MineButton_button_down"]
 [connection signal="button_down" from="PlanetRotationNode/BattleStation/BattleButton" to="." method="_on_BattleButton_button_down"]
 [connection signal="button_down" from="PlanetRotationNode/TRStation/TRButton" to="." method="_on_TRButton_button_down"]
+[connection signal="button_up" from="LeftRotateButton" to="." method="_on_LeftRotateButton_button_up"]
+[connection signal="button_up" from="RightRotateButton" to="." method="_on_RightRotateButton_button_up"]
