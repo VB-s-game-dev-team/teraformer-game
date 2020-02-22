@@ -2,7 +2,7 @@ extends MarginContainer
 
 var global_stuff: GlobalStuff
 
-func ready():
+func _ready():
 	global_stuff = get_parent() as GlobalStuff
 
 func _on_QuitButton_pressed():
