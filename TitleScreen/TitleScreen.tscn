@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://TitleScreen/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://TitleScreen/particle.png" type="Texture" id=2]
 [ext_resource path="res://TitleScreen/background.png" type="Texture" id=3]
 [ext_resource path="res://TitleScreen/title.png" type="Texture" id=4]
 [ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=5]
+[ext_resource path="res://TitleScreen/ParticleButton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
@@ -64,18 +65,19 @@ margin_right = 320.0
 margin_bottom = 222.0
 size_flags_horizontal = 4
 
-[node name="PlayButton" type="Button" parent="Container/ButtonContainer"]
+[node name="PlayButton" parent="Container/ButtonContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 88.0
 margin_bottom = 56.0
 text = "Play"
 
-[node name="QuitButton" type="Button" parent="Container/ButtonContainer"]
+[node name="QuitButton" parent="Container/ButtonContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 60.0
 margin_right = 88.0
 margin_bottom = 116.0
 text = "Quit"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="pressed" from="Container/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Container/ButtonContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
