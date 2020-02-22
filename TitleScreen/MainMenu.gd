@@ -1,10 +1,12 @@
 extends MarginContainer
 
+var global_stuff: GlobalStuff
+
+func ready():
+	global_stuff = get_parent() as GlobalStuff
+
 func _on_QuitButton_pressed():
-	get_parent().set_screen("")
+	global_stuff.set_screen("")
 
 func _on_PlayButton_pressed():
-	switch_to_planet()
-	
-func switch_to_planet():
-	get_parent().set_screen("Planet")
+	global_stuff.set_screen("Planet")
