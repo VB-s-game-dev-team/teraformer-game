@@ -8,15 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "GlobalStuff",
+"language": "GDScript",
+"path": "res://GlobalStuff.gd"
+} ]
 _global_script_class_icons={
-
+"GlobalStuff": ""
 }
 
 [application]
 
 config/name="teraformer-game"
-run/main_scene="res://TitleScreen/TitleScreen.tscn"
+run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
 
 [display]

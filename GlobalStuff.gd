@@ -2,26 +2,26 @@ extends Node
 
 class_name GlobalStuff
 
-var screen: Node = null
+var _screen: Node = null
 
-func _ready():
+func _ready() -> void:
 	set_screen("TitleScreen")
 
 #Swith to a new screen
 # The active one is deleted
 # "" as a parameter closes the game
-func set_screen(path: String):
-	if screen != null:
-		remove_child(screen)
-		screen.call_deferred("free")
+func set_screen(path: String) -> void:
+	if _screen != null:
+		remove_child(_screen)
+		_screen.call_deferred("free")
 	
 	if path == "":
 		call_deferred("quit")
 		return
 	
-	var screen_resource = load("res://" + path + "/" + path + ".tscn") as PackedScene
-	screen = screen_resource.instance() as Node
-	add_child(screen)
+	var screen_resource := load("res://" + path + "/" + path + ".tscn") as PackedScene
+	_screen = screen_resource.instance() as Node
+	add_child(_screen)
 
-func quit():
+func _quit() -> void:
 	get_tree().quit()
