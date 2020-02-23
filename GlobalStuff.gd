@@ -16,7 +16,7 @@ func set_screen(path: String) -> void:
 		_screen.call_deferred("free")
 	
 	if path == "":
-		call_deferred("quit")
+		call_deferred("_quit")
 		return
 	
 	var screen_resource := load("res://" + path + "/" + path + ".tscn") as PackedScene
