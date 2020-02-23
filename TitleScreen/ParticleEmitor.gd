@@ -5,7 +5,7 @@ var _button: Button = null
 
 func _ready() -> void:
 	_button = get_parent() as Button
-	var box = _button.rect_size / 2
+	var box := _button.rect_size / 2
 	position = Vector2(box)
 	(process_material as ParticlesMaterial).emission_box_extents = Vector3(box.x, box.y, 0)
 	emitting = false
