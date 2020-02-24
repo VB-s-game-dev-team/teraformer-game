@@ -10,6 +10,7 @@ var level: int setget _set_level
 
 #global arrays
 var _building_level: Array
+var _station_level: Array
 
 
 #signals for global variables
@@ -18,11 +19,12 @@ signal star_dust_count_changed
 signal experience_changed
 signal level_changed
 signal building_level_changed
+signal station_level_changed
 
 
 var _screen: Node = null
 
-var _SAVE_VERSION := 1
+var _SAVE_VERSION := 2
 
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
@@ -64,7 +66,8 @@ func _save_state() -> void:
 		"star_dust_count": star_dust_count,
 		"experience": experience,
 		"level": level,
-		"building_level": _building_level
+		"building_level": _building_level,
+		"station_level": _station_level
 	}
 	var save_file := File.new()
 	save_file.open("user://save.dat", File.WRITE)
@@ -79,10 +82,16 @@ func _load_state() -> void:
 		star_dust_count = 0
 		experience = 0
 		level = 0
+		
 		_building_level = []
-		_building_level.resize(22)
-		for i in range(0, 22):
+		_building_level.resize(17)
+		for i in range(0, 17):
 			_building_level[i] = 0
+		
+		_station_level = []
+		_station_level.resize(3)
+		for i in range(0, 3):
+			_station_level[i] = 0
 	else:
 		save_file.open("user://save.dat", File.READ)
 		var data := parse_json(save_file.get_line()) as Dictionary
@@ -97,6 +106,11 @@ func _load_state() -> void:
 		
 		if(version >= 1):
 			_building_level = data["building_level"]
+		if(version == 1):
+			_building_level.resize(17)
+		
+		if(version >= 2):
+			_station_level = data["station_level"]
 
 #setters and getters
 func _set_cosmic_credits_count(v: int) -> void:
