@@ -10,3 +10,7 @@ func _on_QuitButton_pressed() -> void:
 
 func _on_PlayButton_pressed() -> void:
 	_global_stuff.set_screen("Planet")
+
+
+func _on_tmp1_pressed():
+	_global_stuff.set_screen("MiningScreen")
