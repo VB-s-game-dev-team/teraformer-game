@@ -79,6 +79,10 @@ func _load_state() -> void:
 		star_dust_count = 0
 		experience = 0
 		level = 0
+		_building_level = []
+		_building_level.resize(22)
+		for i in range(0, 22):
+			_building_level[i] = 0
 	else:
 		save_file.open("user://save.dat", File.READ)
 		var data := parse_json(save_file.get_line()) as Dictionary
