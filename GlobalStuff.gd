@@ -136,3 +136,10 @@ func set_building_level(index: int, value: int) -> void:
 
 func get_building_level(index: int) -> int:
 	return _building_level[index]
+
+func set_station_level(index: int, value: int) -> void:
+	_building_level[index] = value
+	emit_signal("station_level_changed")
+
+func get_station_level(index: int) -> int:
+	return _building_level[index]
