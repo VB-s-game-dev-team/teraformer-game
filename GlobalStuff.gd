@@ -19,8 +19,16 @@ signal level_changed
 var _screen: Node = null
 
 func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
 	_load_state()
 	set_screen("TitleScreen")
+
+func _notification(what) -> void:
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		if _screen.has_method("handle_quit_request"):
+			_screen.handle_quit_request()
+		else:
+			set_screen("")#quit
 
 # Switch to a new screen
 # The active one is deleted

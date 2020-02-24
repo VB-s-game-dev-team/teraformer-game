@@ -36,9 +36,9 @@ expand = true
 
 [node name="Container" type="VBoxContainer" parent="."]
 margin_left = 236.0
-margin_top = 189.0
+margin_top = 159.0
 margin_right = 788.0
-margin_bottom = 411.0
+margin_bottom = 441.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 __meta__ = {
@@ -59,16 +59,16 @@ process_material = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Container"]
-margin_left = 232.0
+margin_left = 97.0
 margin_top = 106.0
-margin_right = 320.0
-margin_bottom = 222.0
+margin_right = 455.0
+margin_bottom = 282.0
 size_flags_horizontal = 4
 
 [node name="PlayButton" parent="Container/ButtonContainer" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 88.0
+margin_right = 358.0
 margin_bottom = 56.0
 text = "Play"
 
@@ -76,8 +76,17 @@ text = "Play"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 60.0
-margin_right = 88.0
+margin_right = 358.0
 margin_bottom = 116.0
 text = "Quit"
+
+[node name="tmp1" parent="Container/ButtonContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 120.0
+margin_right = 358.0
+margin_bottom = 176.0
+text = "(test mining screen)"
 [connection signal="pressed" from="Container/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Container/ButtonContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Container/ButtonContainer/tmp1" to="." method="_on_tmp1_pressed"]
