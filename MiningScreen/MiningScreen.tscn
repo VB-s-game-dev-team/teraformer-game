@@ -22,10 +22,12 @@ expand = true
 [node name="Container" type="GridContainer" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-columns = 3
 
 [node name="BackButton" type="Button" parent="Container"]
 margin_right = 99.0
 margin_bottom = 56.0
 text = "Back"
+
+[node name="GameBoard" type="TileMap" parent="."]
+format = 1
 [connection signal="pressed" from="Container/BackButton" to="." method="_on_BackButton_pressed"]
