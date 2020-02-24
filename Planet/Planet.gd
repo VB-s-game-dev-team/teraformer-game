@@ -8,7 +8,7 @@ var _planet_rotation_speed := 1.0
 var _planet_rotation_direction := 0
 var _planet_rotation_duration := 750.0
 var _rotation_timer := OS.get_ticks_msec()
-var _was_rotating = false
+var _was_rotating := false
 
 # Ready
 func _ready() -> void:
