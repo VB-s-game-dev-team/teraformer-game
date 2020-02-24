@@ -6,7 +6,7 @@
 [ext_resource path="res://Planet/base.png" type="Texture" id=4]
 [ext_resource path="res://Planet/station.png" type="Texture" id=5]
 [ext_resource path="res://Planet/Planet.gd" type="Script" id=6]
-[ext_resource path="res://ResourcesBar/ResourcesBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://resources_bar/resources_bar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Planet/building_spot/building_spot.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
@@ -308,9 +308,20 @@ __meta__ = {
 [node name="ResourcesBar" parent="." instance=ExtResource( 7 )]
 margin_left = 464.0
 margin_right = 1872.0
+
+[node name="MainMenuButton" type="Button" parent="."]
+margin_left = 1656.0
+margin_top = 8.0
+margin_right = 1832.0
+margin_bottom = 56.0
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_down" from="PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
 [connection signal="button_down" from="PlanetRotationNode/MineStation/MineButton" to="." method="_on_MineButton_button_down"]
 [connection signal="button_down" from="PlanetRotationNode/BattleStation/BattleButton" to="." method="_on_BattleButton_button_down"]
 [connection signal="button_down" from="PlanetRotationNode/TRStation/TRButton" to="." method="_on_TRButton_button_down"]
 [connection signal="button_up" from="LeftRotateButton" to="." method="_on_LeftRotateButton_button_up"]
 [connection signal="button_up" from="RightRotateButton" to="." method="_on_RightRotateButton_button_up"]
+[connection signal="button_up" from="MainMenuButton" to="." method="_on_MainMenuButton_button_up"]

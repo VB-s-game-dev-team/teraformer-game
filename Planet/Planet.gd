@@ -1,12 +1,18 @@
 extends Control
 
-onready var PlanetRotationNode = $PlanetRotationNode
+onready var _global_stuff: GlobalStuff
 
+# Rotation variables
+onready var PlanetRotationNode = $PlanetRotationNode
 var _planet_rotation_speed := 1.0
 var _planet_rotation_direction := 0
 var _planet_rotation_duration := 750.0
 var _rotation_timer := OS.get_ticks_msec()
 var _was_rotating = false
+
+# Ready
+func _ready() -> void:
+	_global_stuff = get_parent() as GlobalStuff
 
 # Process
 func _process(delta: float) -> void:
@@ -22,6 +28,21 @@ func _on_LeftRotateButton_button_up() -> void:
 # Right rotate button on click
 func _on_RightRotateButton_button_up() -> void:
 	_initiate_rotation(-1)
+	
+func _on_MainMenuButton_button_up() -> void:
+	_global_stuff.set_screen("TitleScreen")
+	
+func _on_MineButton_button_down() -> void:
+	pass # Replace with function body.
+
+func _on_BattleButton_button_down() -> void:
+	pass # Replace with function body.
+
+func _on_TRButton_button_down() -> void:
+	pass # Replace with function body.
+
+func _on_ShopButton_button_down() -> void:
+	pass # Replace with function body.
 
 # Set rotation variables and disable input	
 func _initiate_rotation(new_direction: int)	-> void:
@@ -37,16 +58,3 @@ func _terminate_rotation() -> void:
 	get_tree().get_root().set_disable_input(false)
 	PlanetRotationNode.fix_rotation_error()
 	_was_rotating = false
-	
-func _on_MineButton_button_down() -> void:
-	pass # Replace with function body.
-
-func _on_BattleButton_button_down() -> void:
-	pass # Replace with function body.
-
-func _on_TRButton_button_down() -> void:
-	pass # Replace with function body.
-
-func _on_ShopButton_button_down() -> void:
-	pass # Replace with function body.
-
