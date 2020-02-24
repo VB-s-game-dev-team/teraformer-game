@@ -35,6 +35,7 @@ __meta__ = {
 }
 
 [node name="BuyMenu" type="Control" parent="."]
+visible = false
 margin_left = -112.0
 margin_right = 272.0
 margin_bottom = 160.0
