@@ -8,18 +8,22 @@ var _planet_rotation_duration := 750.0
 var _rotation_timer := OS.get_ticks_msec()
 var _was_rotating = false
 
+# Process
 func _process(delta: float) -> void:
 	if _rotation_timer + _planet_rotation_duration - 1000 * delta > OS.get_ticks_msec():
 		PlanetRotationNode.rotate(delta * _planet_rotation_direction * _planet_rotation_speed * PI / 2)
 	elif _was_rotating:
 		_terminate_rotation()
-		
+
+# Left rotate button on click	
 func _on_LeftRotateButton_button_up() -> void:
 	_initiate_rotation(1)
 
+# Right rotate button on click
 func _on_RightRotateButton_button_up() -> void:
 	_initiate_rotation(-1)
-		
+
+# Set rotation variables and disable input	
 func _initiate_rotation(new_direction: int)	-> void:
 	_was_rotating = true
 	get_tree().get_root().set_disable_input(true)
@@ -28,6 +32,7 @@ func _initiate_rotation(new_direction: int)	-> void:
 	_rotation_timer = OS.get_ticks_msec()
 	PlanetRotationNode.rotation_position = (PlanetRotationNode.rotation_position + new_direction) % 4
 
+# Fix any rotation errors and enable input 
 func _terminate_rotation() -> void:
 	get_tree().get_root().set_disable_input(false)
 	PlanetRotationNode.fix_rotation_error()

@@ -7,7 +7,7 @@ var screen: Node = null
 func _ready():
 	set_screen("TitleScreen")
 
-#Swith to a new screen
+# Switch to a new screen
 # The active one is deleted
 # "" as a parameter closes the game
 func set_screen(path: String):

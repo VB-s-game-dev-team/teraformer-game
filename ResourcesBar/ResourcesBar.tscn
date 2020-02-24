@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ResourcesBar/resources_bar.png" type="Texture" id=1]
+[ext_resource path="res://fonts/ARIAL.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ResourcesBar/ResourcesBar.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 19
+use_mipmaps = true
+font_data = ExtResource( 2 )
+
+[node name="ResourcesBar" type="Control"]
+margin_right = 1408.0
+margin_bottom = 80.0
+theme = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture" type="TextureRect" parent="."]
+margin_right = 1376.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CosmicCreditsLabel" type="RichTextLabel" parent="."]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 96.0
+margin_bottom = 56.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Cosmic Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CosmicCreditsValue" type="RichTextLabel" parent="."]
+margin_left = 96.0
+margin_top = 16.0
+margin_right = 112.0
+margin_bottom = 64.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarDustLabel" type="RichTextLabel" parent="."]
+margin_left = 144.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = 56.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Star Dust"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarDustValue" type="RichTextLabel" parent="."]
+margin_left = 224.0
+margin_top = 16.0
+margin_right = 240.0
+margin_bottom = 64.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="RichTextLabel" parent="."]
+margin_left = 1152.0
+margin_top = 16.0
+margin_right = 1216.0
+margin_bottom = 40.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelValue" type="RichTextLabel" parent="."]
+margin_left = 1216.0
+margin_top = 16.0
+margin_right = 1232.0
+margin_bottom = 40.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XPBar" type="RichTextLabel" parent="."]
+margin_left = 1280.0
+margin_top = 16.0
+margin_right = 1344.0
+margin_bottom = 40.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "XP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XPValue" type="RichTextLabel" parent="."]
+margin_left = 1328.0
+margin_top = 16.0
+margin_right = 1344.0
+margin_bottom = 40.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResourcesLabel" type="RichTextLabel" parent="."]
+margin_left = 560.0
+margin_top = 8.0
+margin_right = 768.0
+margin_bottom = 56.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Resources will be shown here"
+__meta__ = {
+"_edit_use_anchors_": false
+}

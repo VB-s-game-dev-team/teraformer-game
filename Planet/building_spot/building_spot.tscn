@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/ARIAL.TTF" type="DynamicFontData" id=1]
-[ext_resource path="res://BuildingSpot/BuildingSpot.gd" type="Script" id=2]
-[ext_resource path="res://BuildingSpot/buildingSpot.png" type="Texture" id=3]
-[ext_resource path="res://BuildingSpot/buildingSpotMenu.png" type="Texture" id=4]
+[ext_resource path="res://Planet/building_spot/building_spot.gd" type="Script" id=2]
+[ext_resource path="res://Planet/building_spot/buildingSpot.png" type="Texture" id=3]
+[ext_resource path="res://Planet/building_spot/buildingSpotMenu.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 27

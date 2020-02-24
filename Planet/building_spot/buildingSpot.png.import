@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buildingSpotMenu.png-afb368c4c33989a7c38a6900138af986.stex"
+path="res://.import/buildingSpot.png-b753eb50265cfedb14c21c347f7bf149.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BuildingSpot/buildingSpotMenu.png"
-dest_files=[ "res://.import/buildingSpotMenu.png-afb368c4c33989a7c38a6900138af986.stex" ]
+source_file="res://Planet/building_spot/buildingSpot.png"
+dest_files=[ "res://.import/buildingSpot.png-b753eb50265cfedb14c21c347f7bf149.stex" ]
 
 [params]
 
