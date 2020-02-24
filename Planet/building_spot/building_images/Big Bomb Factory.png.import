@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/resources_bar.png-b2fcae8b8a9339d12411d9b21e5fab09.stex"
+path="res://.import/Big Bomb Factory.png-b13b8e50b45dab72b10498ac77b414fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ResourcesBar/resources_bar.png"
-dest_files=[ "res://.import/resources_bar.png-b2fcae8b8a9339d12411d9b21e5fab09.stex" ]
+source_file="res://Planet/building_spot/building_images/Big Bomb Factory.png"
+dest_files=[ "res://.import/Big Bomb Factory.png-b13b8e50b45dab72b10498ac77b414fb.stex" ]
 
 [params]
 
