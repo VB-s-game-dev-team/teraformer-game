@@ -19,7 +19,7 @@ signal level_changed
 var _screen: Node = null
 
 func _ready() -> void:
-	load_state()
+	_load_state()
 	set_screen("TitleScreen")
 
 # Switch to a new screen
@@ -39,11 +39,11 @@ func set_screen(path: String) -> void:
 	add_child(_screen)
 
 func _quit() -> void:
-	save_state()
+	_save_state()
 	get_tree().quit()
 
 #save/load
-func save_state() -> void:
+func _save_state() -> void:
 	var data := {
 		"cosmic_credits_count": cosmic_credits_count,
 		"star_dust_count": star_dust_count,
@@ -55,7 +55,7 @@ func save_state() -> void:
 	save_file.store_line(to_json(data))
 	save_file.close()
 
-func load_state() -> void:
+func _load_state() -> void:
 	var save_file := File.new()
 	var data: Dictionary = {}
 	
