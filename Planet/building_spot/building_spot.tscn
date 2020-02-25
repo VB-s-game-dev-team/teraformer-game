@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/ARIAL.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://Planet/building_spot/building_spot.gd" type="Script" id=2]
 [ext_resource path="res://Planet/building_spot/buildingSpot.png" type="Texture" id=3]
-[ext_resource path="res://Planet/building_spot/buildingSpotMenu.png" type="Texture" id=4]
-[ext_resource path="res://Planet/building_spot/BuildingOptions.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 27
@@ -38,70 +36,4 @@ flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="BuyMenu" type="Control" parent="."]
-pause_mode = 2
-margin_left = -112.0
-margin_right = 272.0
-margin_bottom = 160.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MenuTexture" type="TextureRect" parent="BuyMenu"]
-pause_mode = 2
-margin_right = 384.0
-margin_bottom = 160.0
-texture = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CloseButton" type="Button" parent="BuyMenu"]
-pause_mode = 2
-margin_left = 224.0
-margin_top = 88.0
-margin_right = 364.0
-margin_bottom = 138.0
-text = "Close"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AcceptButton" type="Button" parent="BuyMenu"]
-pause_mode = 2
-margin_left = 24.0
-margin_top = 88.0
-margin_right = 164.0
-margin_bottom = 138.0
-text = "Accept"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BuildingOptions" type="OptionButton" parent="BuyMenu"]
-pause_mode = 2
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 368.0
-margin_bottom = 64.0
-text = "Building"
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NotEnoughMessage" type="Label" parent="BuyMenu"]
-visible = false
-margin_left = 104.0
-margin_top = 8.0
-margin_right = 282.0
-margin_bottom = 22.0
-text = "Not enough Cosmic Credits!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="button_up" from="BuyButton" to="." method="_on_BuyButton_button_up"]
-[connection signal="button_up" from="BuyMenu/CloseButton" to="." method="_on_CloseButton_button_up"]
-[connection signal="button_up" from="BuyMenu/AcceptButton" to="." method="_on_AcceptButton_button_up"]

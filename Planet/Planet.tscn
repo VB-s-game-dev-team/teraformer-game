@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Planet/background.png" type="Texture" id=1]
 [ext_resource path="res://Planet/PlanetRotationNode.gd" type="Script" id=2]
@@ -9,10 +9,19 @@
 [ext_resource path="res://resources_bar/resources_bar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Planet/building_spot/building_spot.tscn" type="PackedScene" id=8]
 [ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=9]
+[ext_resource path="res://Planet/building_spot/buildingSpotMenu.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 3 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends OptionButton
+
+func _ready() -> void:
+	pass
+
+"
 
 [node name="Planet" type="MarginContainer"]
 anchor_right = 1.0
@@ -217,30 +226,35 @@ margin_left = -432.0
 margin_top = -848.0
 margin_right = -272.0
 margin_bottom = -688.0
+building_names = 1
 
 [node name="BuildingSpot3" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 64.0
 margin_top = -1072.0
 margin_right = 224.0
 margin_bottom = -912.0
+building_names = 2
 
 [node name="BuildingSpot4" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -224.0
 margin_top = -624.0
 margin_right = -64.0
 margin_bottom = -464.0
+building_names = 3
 
 [node name="BuildingSpot5" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 272.0
 margin_top = -848.0
 margin_right = 432.0
 margin_bottom = -688.0
+building_names = 4
 
 [node name="BuildingSpot6" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 64.0
 margin_top = -624.0
 margin_right = 224.0
 margin_bottom = -464.0
+building_names = 5
 
 [node name="BuildingSpot7" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 848.0
@@ -248,6 +262,7 @@ margin_top = -304.0
 margin_right = 1008.0
 margin_bottom = -144.0
 rect_rotation = 90.0
+building_names = 6
 
 [node name="BuildingSpot8" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 1072.0
@@ -255,6 +270,7 @@ margin_top = -80.0
 margin_right = 1232.0
 margin_bottom = 80.0
 rect_rotation = 90.0
+building_names = 7
 
 [node name="BuildingSpot9" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 848.0
@@ -262,6 +278,7 @@ margin_top = 144.0
 margin_right = 1008.0
 margin_bottom = 304.0
 rect_rotation = 90.0
+building_names = 8
 
 [node name="BuildingSpot10" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 624.0
@@ -269,6 +286,7 @@ margin_top = -80.0
 margin_right = 784.0
 margin_bottom = 80.0
 rect_rotation = 90.0
+building_names = 9
 
 [node name="BuildingSpot11" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 304.0
@@ -276,6 +294,7 @@ margin_top = 848.0
 margin_right = 464.0
 margin_bottom = 1008.0
 rect_rotation = 180.0
+building_names = 10
 
 [node name="BuildingSpot12" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 80.0
@@ -283,6 +302,7 @@ margin_top = 1072.0
 margin_right = 240.0
 margin_bottom = 1232.0
 rect_rotation = 180.0
+building_names = 11
 
 [node name="BuildingSpot13" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -144.0
@@ -290,6 +310,7 @@ margin_top = 848.0
 margin_right = 16.0
 margin_bottom = 1008.0
 rect_rotation = 180.0
+building_names = 12
 
 [node name="BuildingSpot14" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 80.0
@@ -297,6 +318,7 @@ margin_top = 624.0
 margin_right = 240.0
 margin_bottom = 784.0
 rect_rotation = 180.0
+building_names = 13
 
 [node name="BuildingSpot15" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -848.0
@@ -304,6 +326,7 @@ margin_top = 304.0
 margin_right = -688.0
 margin_bottom = 464.0
 rect_rotation = -90.0
+building_names = 14
 
 [node name="BuildingSpot16" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -624.0
@@ -311,6 +334,7 @@ margin_top = 80.0
 margin_right = -464.0
 margin_bottom = 240.0
 rect_rotation = -90.0
+building_names = 15
 
 [node name="BuildingSpot17" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -1072.0
@@ -318,6 +342,7 @@ margin_top = 80.0
 margin_right = -912.0
 margin_bottom = 240.0
 rect_rotation = -90.0
+building_names = 16
 
 [node name="BuildingSpot18" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -848.0
@@ -325,6 +350,7 @@ margin_top = -144.0
 margin_right = -688.0
 margin_bottom = 16.0
 rect_rotation = -90.0
+building_names = 17
 
 [node name="Camera2D" type="Camera2D" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport"]
 position = Vector2( 0, -768 )
@@ -339,9 +365,81 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuildingDialog" type="Popup" parent="."]
+[node name="BuildingDialog" type="Control" parent="."]
+visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BuyMenu" type="Control" parent="BuildingDialog"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -64.1
+margin_right = 192.0
+margin_bottom = 64.1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTexture" type="TextureRect" parent="BuildingDialog/BuyMenu"]
+pause_mode = 2
+margin_right = 384.0
+margin_bottom = 160.0
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildingDialogCloseButton" type="Button" parent="BuildingDialog/BuyMenu"]
+pause_mode = 2
+margin_left = 224.0
+margin_top = 88.0
+margin_right = 364.0
+margin_bottom = 138.0
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildingDialogAcceptButton" type="Button" parent="BuildingDialog/BuyMenu"]
+pause_mode = 2
+margin_left = 24.0
+margin_top = 88.0
+margin_right = 164.0
+margin_bottom = 138.0
+text = "Accept"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildingOptions" type="OptionButton" parent="BuildingDialog/BuyMenu"]
+pause_mode = 2
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 368.0
+margin_bottom = 64.0
+text = "Building"
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotEnoughMessage" type="Label" parent="BuildingDialog/BuyMenu"]
+visible = false
+margin_left = 104.0
+margin_top = 8.0
+margin_right = 282.0
+margin_bottom = 22.0
+text = "Not enough Cosmic Credits!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="MainContainer/Header/MainMenuButton" to="." method="_on_MainMenuButton_button_up"]
 [connection signal="button_up" from="MainContainer/PlanetContainer/LeftRotateButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode" method="_on_LeftRotateButton_button_up"]
 [connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
@@ -349,3 +447,5 @@ margin_bottom = 600.0
 [connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BattleStation/BattleButton" to="." method="_on_BattleButton_button_down"]
 [connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/TRStation/TRButton" to="." method="_on_TRButton_button_down"]
 [connection signal="button_up" from="MainContainer/PlanetContainer/RightRotateButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode" method="_on_RightRotateButton_button_up"]
+[connection signal="pressed" from="BuildingDialog/BuyMenu/BuildingDialogCloseButton" to="." method="_on_BuildingDialogCloseButton_pressed"]
+[connection signal="button_up" from="BuildingDialog/BuyMenu/BuildingDialogAcceptButton" to="." method="_on_BuildingDialogAcceptButton_button_up"]
