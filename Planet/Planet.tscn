@@ -74,6 +74,7 @@ stretch = true
 
 [node name="Viewport" type="Viewport" parent="MainContainer/PlanetContainer/ViewportContainer"]
 size = Vector2( 953, 540 )
+handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="PlanetRotationNode" type="Node2D" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport"]
@@ -337,6 +338,10 @@ text = "R"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BuildingDialog" type="Popup" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
 [connection signal="button_up" from="MainContainer/Header/MainMenuButton" to="." method="_on_MainMenuButton_button_up"]
 [connection signal="button_up" from="MainContainer/PlanetContainer/LeftRotateButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode" method="_on_LeftRotateButton_button_up"]
 [connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
