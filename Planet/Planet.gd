@@ -3,8 +3,8 @@ extends Control
 onready var _global_stuff: GlobalStuff
 
 # Rotation variables
-onready var PlanetRotationNode = $PlanetRotationNode
-onready var ResourcesBar = $ResourcesBar
+onready var PlanetRotationNode = $MainContaner/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode
+onready var ResourcesBar = $MainContainer/Header/ResourcesBar
 var _planet_rotation_speed := 1.0
 var _planet_rotation_direction := 0
 var _planet_rotation_duration := 750.0

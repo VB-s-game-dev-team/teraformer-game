@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Planet/background.png" type="Texture" id=1]
 [ext_resource path="res://Planet/PlanetRotationNode.gd" type="Script" id=2]
@@ -8,30 +8,83 @@
 [ext_resource path="res://Planet/Planet.gd" type="Script" id=6]
 [ext_resource path="res://resources_bar/resources_bar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Planet/building_spot/building_spot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 3 )
 
-[node name="Planet" type="Control"]
+[node name="Planet" type="MarginContainer"]
 margin_left = -1152.0
 margin_top = -1152.0
 margin_right = 1152.0
 margin_bottom = 1152.0
+theme = ExtResource( 9 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlanetRotationNode" type="Node2D" parent="."]
-position = Vector2( 1152, 1152 )
+[node name="MainContainer" type="VBoxContainer" parent="."]
+margin_right = 2304.0
+margin_bottom = 2304.0
+size_flags_vertical = 3
+
+[node name="Header" type="HBoxContainer" parent="MainContainer"]
+margin_right = 2304.0
+margin_bottom = 56.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResourcesBar" parent="MainContainer/Header" instance=ExtResource( 7 )]
+margin_right = 2098.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+
+[node name="MainMenuButton" type="Button" parent="MainContainer/Header"]
+margin_left = 2098.0
+margin_right = 2304.0
+margin_bottom = 56.0
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlanetContainer" type="HBoxContainer" parent="MainContainer"]
+margin_top = 60.0
+margin_right = 2304.0
+margin_bottom = 2304.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="LeftRotateButton" type="Button" parent="MainContainer/PlanetContainer"]
+margin_right = 32.0
+margin_bottom = 2244.0
+text = "L"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="MainContainer/PlanetContainer"]
+margin_left = 32.0
+margin_right = 2265.0
+margin_bottom = 2244.0
+size_flags_horizontal = 3
+
+[node name="Viewport" type="Viewport" parent="MainContainer/PlanetContainer/ViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="PlanetRotationNode" type="Node2D" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport"]
 script = ExtResource( 2 )
 
-[node name="Background" type="Sprite" parent="PlanetRotationNode"]
+[node name="Background" type="Sprite" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode"]
 scale = Vector2( 4.4, 4.4 )
 texture = ExtResource( 1 )
 
-[node name="Base" type="Control" parent="PlanetRotationNode"]
+[node name="Base" type="Control" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode"]
 margin_left = -256.0
 margin_top = -896.0
 margin_right = 256.0
@@ -40,7 +93,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BaseTexture" type="TextureRect" parent="PlanetRotationNode/Base"]
+[node name="BaseTexture" type="TextureRect" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/Base"]
 margin_right = 512.0
 margin_bottom = 256.0
 texture = ExtResource( 4 )
@@ -49,7 +102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopButton" type="Button" parent="PlanetRotationNode/Base"]
+[node name="ShopButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/Base"]
 margin_left = 16.0
 margin_top = 144.0
 margin_right = 240.0
@@ -60,7 +113,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MineStation" type="Control" parent="PlanetRotationNode"]
+[node name="MineStation" type="Control" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode"]
 margin_left = -896.0
 margin_top = 128.0
 margin_right = -640.0
@@ -70,7 +123,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MineTexture" type="TextureRect" parent="PlanetRotationNode/MineStation"]
+[node name="MineTexture" type="TextureRect" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/MineStation"]
 margin_top = -3.05176e-05
 margin_right = 256.0
 margin_bottom = 256.0
@@ -80,7 +133,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MineButton" type="Button" parent="PlanetRotationNode/MineStation"]
+[node name="MineButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/MineStation"]
 margin_right = 256.0
 margin_bottom = 256.0
 custom_fonts/font = SubResource( 1 )
@@ -90,7 +143,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BattleStation" type="Control" parent="PlanetRotationNode"]
+[node name="BattleStation" type="Control" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode"]
 margin_left = 896.0
 margin_top = -128.0
 margin_right = 1152.0
@@ -100,7 +153,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BattleTexture" type="TextureRect" parent="PlanetRotationNode/BattleStation"]
+[node name="BattleTexture" type="TextureRect" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BattleStation"]
 margin_top = -3.05176e-05
 margin_right = 256.0
 margin_bottom = 256.0
@@ -110,7 +163,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BattleButton" type="Button" parent="PlanetRotationNode/BattleStation"]
+[node name="BattleButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BattleStation"]
 margin_right = 256.0
 margin_bottom = 256.0
 custom_fonts/font = SubResource( 1 )
@@ -120,7 +173,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TRStation" type="Control" parent="PlanetRotationNode"]
+[node name="TRStation" type="Control" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode"]
 margin_left = 128.0
 margin_top = 896.0
 margin_right = 384.0
@@ -130,7 +183,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TRTexture" type="TextureRect" parent="PlanetRotationNode/TRStation"]
+[node name="TRTexture" type="TextureRect" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/TRStation"]
 margin_top = -3.05176e-05
 margin_right = 256.0
 margin_bottom = 256.0
@@ -140,7 +193,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TRButton" type="Button" parent="PlanetRotationNode/TRStation"]
+[node name="TRButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/TRStation"]
 margin_top = 6.10352e-05
 margin_right = 256.0
 margin_bottom = 256.0
@@ -151,177 +204,144 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuildingSpots" type="Node2D" parent="PlanetRotationNode"]
+[node name="BuildingSpots" type="Node2D" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode"]
 
-[node name="BuildingSpot1" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot1" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -224.0
 margin_top = -1072.0
 margin_right = -64.0
 margin_bottom = -912.0
 
-[node name="BuildingSpot2" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot2" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -432.0
 margin_top = -848.0
 margin_right = -272.0
 margin_bottom = -688.0
 
-[node name="BuildingSpot3" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot3" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 64.0
 margin_top = -1072.0
 margin_right = 224.0
 margin_bottom = -912.0
 
-[node name="BuildingSpot4" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot4" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -224.0
 margin_top = -624.0
 margin_right = -64.0
 margin_bottom = -464.0
 
-[node name="BuildingSpot5" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot5" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 272.0
 margin_top = -848.0
 margin_right = 432.0
 margin_bottom = -688.0
 
-[node name="BuildingSpot6" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot6" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 64.0
 margin_top = -624.0
 margin_right = 224.0
 margin_bottom = -464.0
 
-[node name="BuildingSpot7" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot7" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 848.0
 margin_top = -304.0
 margin_right = 1008.0
 margin_bottom = -144.0
 rect_rotation = 90.0
 
-[node name="BuildingSpot8" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot8" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 1072.0
 margin_top = -80.0
 margin_right = 1232.0
 margin_bottom = 80.0
 rect_rotation = 90.0
 
-[node name="BuildingSpot9" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot9" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 848.0
 margin_top = 144.0
 margin_right = 1008.0
 margin_bottom = 304.0
 rect_rotation = 90.0
 
-[node name="BuildingSpot10" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot10" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 624.0
 margin_top = -80.0
 margin_right = 784.0
 margin_bottom = 80.0
 rect_rotation = 90.0
 
-[node name="BuildingSpot11" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot11" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 304.0
 margin_top = 848.0
 margin_right = 464.0
 margin_bottom = 1008.0
 rect_rotation = 180.0
 
-[node name="BuildingSpot12" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot12" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 80.0
 margin_top = 1072.0
 margin_right = 240.0
 margin_bottom = 1232.0
 rect_rotation = 180.0
 
-[node name="BuildingSpot13" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot13" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -144.0
 margin_top = 848.0
 margin_right = 16.0
 margin_bottom = 1008.0
 rect_rotation = 180.0
 
-[node name="BuildingSpot14" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot14" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 80.0
 margin_top = 624.0
 margin_right = 240.0
 margin_bottom = 784.0
 rect_rotation = 180.0
 
-[node name="BuildingSpot15" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot15" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -848.0
 margin_top = 304.0
 margin_right = -688.0
 margin_bottom = 464.0
 rect_rotation = -90.0
 
-[node name="BuildingSpot16" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot16" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -624.0
 margin_top = 80.0
 margin_right = -464.0
 margin_bottom = 240.0
 rect_rotation = -90.0
 
-[node name="BuildingSpot17" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot17" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -1072.0
 margin_top = 80.0
 margin_right = -912.0
 margin_bottom = 240.0
 rect_rotation = -90.0
 
-[node name="BuildingSpot18" parent="PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
+[node name="BuildingSpot18" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -848.0
 margin_top = -144.0
 margin_right = -688.0
 margin_bottom = 16.0
 rect_rotation = -90.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 1152, 384 )
+[node name="Camera2D" type="Camera2D" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport"]
+position = Vector2( 0, -768 )
 current = true
 
-[node name="LeftRotateButton" type="Button" parent="."]
-anchor_left = 0.292
-anchor_top = 0.139
-anchor_right = 0.292
-anchor_bottom = 0.139
-margin_left = -144.768
-margin_top = -16.256
-margin_right = -80.7681
-margin_bottom = 143.744
-text = "L"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RightRotateButton" type="Button" parent="."]
-anchor_left = 0.292
-anchor_top = 0.139
-anchor_right = 0.292
-anchor_bottom = 0.139
-margin_left = 1039.23
-margin_top = -16.256
-margin_right = 1103.23
-margin_bottom = 143.744
+[node name="RightRotateButton" type="Button" parent="MainContainer/PlanetContainer"]
+margin_left = 2265.0
+margin_right = 2304.0
+margin_bottom = 2244.0
 text = "R"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ResourcesBar" parent="." instance=ExtResource( 7 )]
-margin_left = 464.0
-margin_right = 1872.0
-
-[node name="MainMenuButton" type="Button" parent="."]
-margin_left = 1656.0
-margin_top = 8.0
-margin_right = 1832.0
-margin_bottom = 56.0
-text = "Main Menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="button_down" from="PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
-[connection signal="button_down" from="PlanetRotationNode/MineStation/MineButton" to="." method="_on_MineButton_button_down"]
-[connection signal="button_down" from="PlanetRotationNode/BattleStation/BattleButton" to="." method="_on_BattleButton_button_down"]
-[connection signal="button_down" from="PlanetRotationNode/TRStation/TRButton" to="." method="_on_TRButton_button_down"]
-[connection signal="button_up" from="LeftRotateButton" to="." method="_on_LeftRotateButton_button_up"]
-[connection signal="button_up" from="RightRotateButton" to="." method="_on_RightRotateButton_button_up"]
-[connection signal="button_up" from="MainMenuButton" to="." method="_on_MainMenuButton_button_up"]
+[connection signal="button_up" from="MainContainer/Header/MainMenuButton" to="." method="_on_MainMenuButton_button_up"]
+[connection signal="button_up" from="MainContainer/PlanetContainer/LeftRotateButton" to="." method="_on_LeftRotateButton_button_up"]
+[connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/Base/ShopButton" to="." method="_on_ShopButton_button_down"]
+[connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/MineStation/MineButton" to="." method="_on_MineButton_button_down"]
+[connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BattleStation/BattleButton" to="." method="_on_BattleButton_button_down"]
+[connection signal="button_down" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/TRStation/TRButton" to="." method="_on_TRButton_button_down"]
+[connection signal="button_up" from="MainContainer/PlanetContainer/RightRotateButton" to="." method="_on_RightRotateButton_button_up"]

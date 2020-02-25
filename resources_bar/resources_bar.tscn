@@ -31,13 +31,17 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 1408.0
 margin_bottom = 80.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 24
+custom_constants/margin_left = 100
 
 [node name="LabelContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 1408.0
+margin_left = 100.0
+margin_right = 1384.0
 margin_bottom = 80.0
 
 [node name="CosmicCreditsLabel" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_right = 152.0
+margin_right = 139.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -47,8 +51,8 @@ __meta__ = {
 }
 
 [node name="CosmicCreditsValue" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 156.0
-margin_right = 308.0
+margin_left = 143.0
+margin_right = 282.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -58,8 +62,8 @@ __meta__ = {
 }
 
 [node name="StarDustLabel" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 312.0
-margin_right = 464.0
+margin_left = 286.0
+margin_right = 425.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -69,8 +73,8 @@ __meta__ = {
 }
 
 [node name="StarDustValue" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 468.0
-margin_right = 620.0
+margin_left = 429.0
+margin_right = 568.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -80,8 +84,8 @@ __meta__ = {
 }
 
 [node name="ResourcesLabel" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 624.0
-margin_right = 776.0
+margin_left = 572.0
+margin_right = 711.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -91,8 +95,8 @@ __meta__ = {
 }
 
 [node name="LevelLabel" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 780.0
-margin_right = 932.0
+margin_left = 715.0
+margin_right = 854.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -102,8 +106,8 @@ __meta__ = {
 }
 
 [node name="LevelValue" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 936.0
-margin_right = 1088.0
+margin_left = 858.0
+margin_right = 997.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -113,8 +117,8 @@ __meta__ = {
 }
 
 [node name="XPBar" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 1092.0
-margin_right = 1244.0
+margin_left = 1001.0
+margin_right = 1140.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -124,8 +128,8 @@ __meta__ = {
 }
 
 [node name="XPValue" type="RichTextLabel" parent="MarginContainer/LabelContainer"]
-margin_left = 1248.0
-margin_right = 1408.0
+margin_left = 1144.0
+margin_right = 1284.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
