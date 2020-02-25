@@ -62,7 +62,7 @@ func _on_AcceptButton_button_up() -> void:
 	var price := _building_prices[options.selected] as int
 	var ccc := _global_stuff.cosmic_credits_count
 	if price <= ccc:
-		_global_stuff._set_cosmic_credits_count(ccc - price)
+		_global_stuff.cosmic_credits_count = ccc - price
 		$BuildingSpotTexture.texture = _building_images[options.selected]
 		_building_prices[options.selected] *= _upgrade_cost_increase_rate
 		
