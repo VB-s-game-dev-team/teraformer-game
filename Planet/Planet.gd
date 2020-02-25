@@ -4,6 +4,7 @@ onready var _global_stuff: GlobalStuff
 
 # Rotation variables
 onready var PlanetRotationNode = $PlanetRotationNode
+onready var ResourcesBar = $ResourcesBar
 var _planet_rotation_speed := 1.0
 var _planet_rotation_direction := 0
 var _planet_rotation_duration := 750.0
@@ -13,7 +14,8 @@ var _was_rotating := false
 # Ready
 func _ready() -> void:
 	_global_stuff = get_parent() as GlobalStuff
-
+	ResourcesBar.setup(_global_stuff)
+	
 # Process
 func _process(delta: float) -> void:
 	if _rotation_timer + _planet_rotation_duration - 1000 * delta > OS.get_ticks_msec():
