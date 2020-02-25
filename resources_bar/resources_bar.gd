@@ -2,10 +2,10 @@ extends Control
 
 var _global_stuff: GlobalStuff
 
-onready var CosmicCreditsValue = $CosmicCreditsValue
-onready var StarDustValue = $StarDustValue
-onready var LevelValue = $LevelValue
-onready var XPValue = $XPValue
+onready var CosmicCreditsValue = $MarginContainer/LabelContainer/CosmicCreditsValue
+onready var StarDustValue = $MarginContainer/LabelContainer/StarDustValue
+onready var LevelValue = $MarginContainer/LabelContainer/LevelValue
+onready var XPValue = $MarginContainer/LabelContainer/XPValue
 
 func _ready() -> void:
 	pass
