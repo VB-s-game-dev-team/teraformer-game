@@ -8,7 +8,7 @@ onready var LevelValue = $LevelValue
 onready var XPValue = $XPValue
 
 func _ready() -> void:
-	_global_stuff = get_parent().get_parent() as GlobalStuff
+	_global_stuff = get_parent()._global_stuff as GlobalStuff
 	CosmicCreditsValue.text = _global_stuff.cosmic_credits_count
 	StarDustValue.text = _global_stuff.star_dust_count
 	LevelValue.text = _global_stuff.level
