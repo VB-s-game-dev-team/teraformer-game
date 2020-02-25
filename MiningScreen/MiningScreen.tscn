@@ -22,6 +22,7 @@ texture = ExtResource( 1 )
 expand = true
 
 [node name="GameBoard" type="TileMap" parent="."]
+visible = false
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
