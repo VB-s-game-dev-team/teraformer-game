@@ -1,8 +1,11 @@
 extends Camera2D
 
 
-export(float) var _MAX_ZOOM: float = 8
-var _min_zoom: float = 1
+export(float) var _MAX_ZOOM: float = 1 / 8.0
+export(float) var _MIN_ZOOM: float = 1 / 1
+
+func _ready() -> void:
+	zoom = Vector2.ONE * _MAX_ZOOM
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.button_mask == BUTTON_RIGHT:
@@ -19,7 +22,7 @@ func _zoom(factor: float, where: Vector2) -> void:
 		factor = -1 / factor
 	var pos1 := where * zoom.x
 	zoom *= factor
-	zoom = Vector2(1, 1) * max(_min_zoom, min(_MAX_ZOOM, zoom.x))
+	zoom = Vector2.ONE * min(_MIN_ZOOM, max(_MAX_ZOOM, zoom.x))
 	var pos2 := where * zoom.x
 	offset += (pos1 - pos2)
 
