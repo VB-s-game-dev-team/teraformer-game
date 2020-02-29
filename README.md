@@ -15,6 +15,8 @@ inventing new weapons and even discovering new celestial bodies
 to colonize, which can potentially unlock more minigames, resulting
 in more fun.
 
-Lead Programmer & Architect: VojtechBrezina\
-Game Designer & Programmer: Filipino9507\
-Game Artist: Dastyj
+|our team||
+|:-|:-|
+|*Lead Programmer & Architect*|[@VojtechBrezina](https://github.com/VojtechBrezina/)|
+|*Game Designer & Programmer*|[@Filipino9507](https://github.com/Filipino9507/)|
+|*Game Artist*|[@Dastyj](https://github.com/Dastyj/)|
