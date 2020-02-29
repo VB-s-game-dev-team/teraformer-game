@@ -4,6 +4,10 @@ extends Camera2D
 export(float) var _MAX_ZOOM: float = 8
 var _min_zoom: float
 
+var _size: Vector2
+
+func _ready() -> void:
+	_size = get_viewport_rect().size
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.button_mask == BUTTON_RIGHT:
@@ -18,11 +22,10 @@ func _input(event: InputEvent) -> void:
 func _zoom(factor: float, where: Vector2) -> void:
 	if factor < 0:
 		factor = -1 / factor
+	var pos1 := where * zoom.x
 	zoom *= factor
-	var rel_pos := where - get_viewport_rect().size / 2
-	offset += rel_pos
-	offset -= rel_pos * factor 
-	
+	var pos2 := where * zoom.x
+	offset += (pos1 - pos2)
 
 func _on_MiningScreen_game_started() -> void:
 	pass
