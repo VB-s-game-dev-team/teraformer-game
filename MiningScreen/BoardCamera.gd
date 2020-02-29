@@ -3,7 +3,6 @@ extends Camera2D
 
 export(float) var _MAX_ZOOM: float = 8
 var _min_zoom: float
-var _DEFAULT_TILE_SIZE = 16
 
 
 func _input(event: InputEvent) -> void:
@@ -12,13 +11,18 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		match event.button_index:
 			BUTTON_WHEEL_UP:
-				var rel: Vector2 = offset - event.position
-				zoom *= 1.1
-				offset *= 1.1
+				_zoom(1.1, event.position)
 			BUTTON_WHEEL_DOWN: 
-				var rel: Vector2 = offset - event.position
-				zoom /= 1.1
-				offset /= 1.1
+				_zoom(-1.1, event.position)
+
+func _zoom(factor: float, where: Vector2) -> void:
+	if factor < 0:
+		factor = -1 / factor
+	zoom *= factor
+	var rel_pos := where - get_viewport_rect().size / 2
+	offset += rel_pos
+	offset -= rel_pos * factor 
+	
 
 func _on_MiningScreen_game_started() -> void:
-	pass#set_tile_size(_MAX_TILE_SIZE)
+	pass
