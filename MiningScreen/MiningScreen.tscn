@@ -64,8 +64,6 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
 script = ExtResource( 1 )
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/BoardCamera" method="_on_MiningScreen_game_started"]
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/GameBoard" method="_on_MiningScreen_game_started"]
