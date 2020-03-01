@@ -1,11 +1,11 @@
 extends Control
 
-onready var _global_stuff: GlobalStuff
+onready var global_stuff: GlobalStuff
 onready var ResourcesBar = $MainContainer/Header/ResourcesBar
 onready var BuildingDialog = $BuildingDialog
 onready var BuildingSpots = $MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots
 
-const _building_spot_names = [
+const building_spot_names = [
 	"Building1", 
 	"Building2",
 	"Building3",
@@ -26,14 +26,33 @@ const _building_spot_names = [
 	"Building18"
 ]
 
-var selected_idx := -1  # Selected building to build
+const building_descriptions = [
+	"SomeDescription1", 
+	"SomeDescription2",
+	"SomeDescription3",
+	"SomeDescription4",
+	"SomeDescription5",
+	"SomeDescription6",
+	"Suicide Drone Lab Description",
+	"Drill Dome Description",
+	"Big Bomb Factory Description",
+	"SomeDescription10",
+	"SomeDescription11",
+	"SomeDescription12",
+	"SomeDescription13",
+	"SomeDescription14",
+	"SomeDescription15",
+	"SomeDescription16",
+	"SomeDescription17",
+	"SomeDescription18"
+]
 
 const img_path := "res://Planet/building_spot/building_images/"
 const img_suffix := ".png"
-var _building_images := []
+var building_images := []
 
-const _upgrade_cost_increase_rate := 1.2  # should be added to global stuff later
-var _building_prices := [
+const upgrade_cost_increase_rate := 1.2  # should be added to global stuff later
+var building_prices := [
 	0, 0, 0, 0, 0, 0,
 	1000, 2000, 5000, 0,
 	0, 0, 0, 0,
@@ -42,22 +61,19 @@ var _building_prices := [
 
 # Ready
 func _ready() -> void:
-	_global_stuff = get_parent() as GlobalStuff
-	ResourcesBar.setup(_global_stuff)
+	global_stuff = get_parent() as GlobalStuff
+	ResourcesBar.setup(global_stuff)
 	
-	_building_images.resize(len(_building_spot_names))
-	for i in range(len(_building_spot_names)):
-		_building_images[i] = load(img_path + _building_spot_names[i] + img_suffix)
-	
-	for bs in BuildingSpots.get_children():
-		bs.connect("open_buy_menu", self, "_on_BuildingSpot_open_buy_menu")
-	
+	building_images.resize(len(building_spot_names))
+	for i in range(len(building_spot_names)):
+		building_images[i] = load(img_path + building_spot_names[i] + img_suffix)
+
 # Process
 func _process(delta: float) -> void:
 	pass
 	
 func _on_MainMenuButton_button_up() -> void:
-	_global_stuff.set_screen("TitleScreen")
+	global_stuff.set_screen("TitleScreen")
 	
 func _on_MineButton_button_down() -> void:
 	pass # Replace with function body.
@@ -71,23 +87,4 @@ func _on_TRButton_button_down() -> void:
 func _on_ShopButton_button_down() -> void:
 	pass # Replace with function body.
 
-# Opening the buy menu
-func _on_BuildingSpot_open_buy_menu(idx) -> void:
-	selected_idx = idx
-	BuildingDialog.visible = true
 
-func _on_BuildingDialogCloseButton_pressed() -> void:
-	selected_idx = -1
-	BuildingDialog.visible = false
-
-func _on_BuildingDialogAcceptButton_button_up() -> void:
-	var price := _building_prices[selected_idx] as int
-	var ccc := _global_stuff.cosmic_credits_count
-	if price <= ccc:
-		_global_stuff.cosmic_credits_count = ccc - price
-		BuildingSpots.get_child(selected_idx).texture = _building_images[selected_idx]
-		_building_prices[selected_idx] *= _upgrade_cost_increase_rate
-		_global_stuff.set_building_level(selected_idx, _global_stuff.get_building_level(selected_idx) + 1)
-		BuildingDialog.visible = false
-	else:
-		$BuyMenu/NotEnoughMessage.visible = true
