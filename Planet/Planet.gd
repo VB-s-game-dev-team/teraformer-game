@@ -62,6 +62,10 @@ var building_prices := [
 # Ready
 func _ready() -> void:
 	global_stuff = get_parent() as GlobalStuff
+	
+	# Value for testing
+	global_stuff.cosmic_credits_count = 5000
+	
 	ResourcesBar.setup(global_stuff)
 	
 	building_images.resize(len(building_spot_names))

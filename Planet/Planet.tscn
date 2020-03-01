@@ -149,11 +149,12 @@ __meta__ = {
 
 [node name="NotEnoughMessage" type="Label" parent="MainContainer/PlanetContainer/BuildingDialog/BuyMenu"]
 visible = false
-margin_left = 104.0
-margin_top = 8.0
-margin_right = 282.0
-margin_bottom = 22.0
-text = "Not enough Cosmic Credits!"
+modulate = Color( 1, 0, 0, 1 )
+margin_left = -46.0
+margin_top = 182.0
+margin_right = 434.0
+margin_bottom = 238.0
+text = "Not enough cosmic credits!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
