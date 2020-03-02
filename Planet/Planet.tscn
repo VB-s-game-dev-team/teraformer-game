@@ -142,9 +142,9 @@ __meta__ = {
 [node name="NotEnoughLevelMessage" type="Label" parent="MainContainer/PlanetContainer/BuildingDialog/BuyMenu"]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
-margin_left = -32.0
+margin_left = 32.0
 margin_top = 432.0
-margin_right = 448.0
+margin_right = 352.0
 margin_bottom = 488.0
 text = "Insufficient level!!"
 __meta__ = {
@@ -154,9 +154,8 @@ __meta__ = {
 [node name="MaxLevelMessage" type="Label" parent="MainContainer/PlanetContainer/BuildingDialog/BuyMenu"]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
-margin_left = -32.0
 margin_top = 432.0
-margin_right = 448.0
+margin_right = 384.0
 margin_bottom = 488.0
 text = "Building at max level!"
 __meta__ = {

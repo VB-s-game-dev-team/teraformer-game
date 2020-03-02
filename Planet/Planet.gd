@@ -66,19 +66,32 @@ const building_level_requirements = [
 	[-1, 1, 1, 1, 1, 1],
 	[-1, 1, 1, 1, 1, 1],
 	[-1, 1, 2, 3, 4, 5],
-	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1]
 ]
 
 const img_path := "res://Planet/building_spot/building_images/"
 const img_suffix := ".png"
 var building_images := []
 
-const upgrade_cost_increase_rate := 1.2  # should be added to global stuff later
 var building_prices := [
-	0, 0, 0, 0, 0, 0,
-	1000, 2000, 5000, 0,
-	0, 0, 0, 0,
-	0, 0, 0, 0
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 1000, 2000, 5000, 10000, 20000],
+	[-1, 1500, 2500, 7000, 15000, 35000],
+	[-1, 2500, 5000, 12000, 22000, 55000],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0],
+	[-1, 0, 0, 0, 0, 0]
 ]
 
 # Ready
@@ -103,7 +116,12 @@ func _on_MainMenuButton_button_up() -> void:
 	global_stuff.set_screen("TitleScreen")
 	
 func _on_MineButton_button_down() -> void:
-	pass # Replace with function body.
+	
+	# Handle all of the bonuses, power-ups and other parameters
+	# (if needed)
+	# In the future
+	
+	global_stuff.set_screen("MiningScreen")
 
 func _on_BattleButton_button_down() -> void:
 	pass # Replace with function body.
@@ -113,5 +131,3 @@ func _on_TRButton_button_down() -> void:
 
 func _on_ShopButton_button_down() -> void:
 	pass # Replace with function body.
-
-
