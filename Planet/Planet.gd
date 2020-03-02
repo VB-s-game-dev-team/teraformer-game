@@ -47,6 +47,28 @@ const building_descriptions = [
 	"SomeDescription18"
 ]
 
+# The first -1 is always for level 0 (since you can be at any level to have a non-built building)
+const building_level_requirements = [
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 3, 6, 10, 15],
+	[-1, 3, 5, 8, 12, 18],
+	[-1, 8, 11, 14, 20, 25],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 1, 1, 1, 1],
+	[-1, 1, 2, 3, 4, 5],
+	[-1, 1, 1, 1, 1, 1],
+]
+
 const img_path := "res://Planet/building_spot/building_images/"
 const img_suffix := ".png"
 var building_images := []
@@ -63,7 +85,8 @@ var building_prices := [
 func _ready() -> void:
 	global_stuff = get_parent() as GlobalStuff
 	
-	# Value for testing
+	# Values for testing
+	global_stuff.level = 1
 	global_stuff.cosmic_credits_count = 5000
 	
 	ResourcesBar.setup(global_stuff)
