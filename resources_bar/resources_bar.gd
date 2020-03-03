@@ -12,6 +12,13 @@ func _ready() -> void:
 	
 func setup(g: GlobalStuff) -> void:
 	_global_stuff = g
+	g.connect("cosmic_credits_count_changed", self, "_update_values")
+	g.connect("star_dust_count_changed", self, "_update_values")
+	g.connect("experience_changed", self, "_update_values")
+	g.connect("level_changed", self, "_update_values")
+	_update_values()
+	
+func _update_values():
 	CosmicCreditsValue.text = str(_global_stuff.cosmic_credits_count)
 	StarDustValue.text = str(_global_stuff.star_dust_count)
 	LevelValue.text = str(_global_stuff.level)

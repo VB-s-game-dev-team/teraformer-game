@@ -89,7 +89,7 @@ margin_right = 711.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
-text = "Resources will be shown here"
+text = "Resources"
 __meta__ = {
 "_edit_use_anchors_": false
 }
