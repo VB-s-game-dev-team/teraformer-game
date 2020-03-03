@@ -49,6 +49,7 @@ stretch = true
 size = Vector2( 1024, 540 )
 transparent_bg = true
 handle_input_locally = false
+usage = 0
 render_target_update_mode = 3
 
 [node name="GameBoard" type="TileMap" parent="VBoxContainer/BoardContainer/BoardViewport"]
@@ -56,18 +57,17 @@ tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 7 )
-_tile_size = 64.0
+_tile_size = 16.0
 
 [node name="BoardCamera" type="Camera2D" parent="VBoxContainer/BoardContainer/BoardViewport"]
 anchor_mode = 0
 current = true
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
 script = ExtResource( 1 )
 _MAX_ZOOM = 0.1
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/BoardCamera" method="_on_MiningScreen_game_started"]
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/GameBoard" method="_on_MiningScreen_game_started"]
+[connection signal="setup" from="." to="VBoxContainer/Header/ResourcesBar" method="setup"]
 [connection signal="pressed" from="VBoxContainer/Header/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="bounds_updated" from="VBoxContainer/BoardContainer/BoardViewport/GameBoard" to="VBoxContainer/BoardContainer/BoardViewport/BoardCamera" method="_on_GameBoard_bounds_updated"]
