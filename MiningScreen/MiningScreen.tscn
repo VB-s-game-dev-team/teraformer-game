@@ -56,6 +56,7 @@ tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 7 )
+_tile_size = 64.0
 
 [node name="BoardCamera" type="Camera2D" parent="VBoxContainer/BoardContainer/BoardViewport"]
 anchor_mode = 0
@@ -65,6 +66,8 @@ drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 script = ExtResource( 1 )
+_MAX_ZOOM = 0.1
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/BoardCamera" method="_on_MiningScreen_game_started"]
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/GameBoard" method="_on_MiningScreen_game_started"]
 [connection signal="pressed" from="VBoxContainer/Header/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="bounds_updated" from="VBoxContainer/BoardContainer/BoardViewport/GameBoard" to="VBoxContainer/BoardContainer/BoardViewport/BoardCamera" method="_on_GameBoard_bounds_updated"]

@@ -24,7 +24,7 @@ signal station_level_changed
 
 var _screen: Node = null
 
-var _SAVE_VERSION := 2
+var _SAVE_VERSION := 3
 
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
@@ -84,8 +84,8 @@ func _load_state() -> void:
 		level = 0
 		
 		_building_level = []
-		_building_level.resize(17)
-		for i in range(0, 17):
+		_building_level.resize(18)
+		for i in range(0, 18):
 			_building_level[i] = 0
 		
 		_station_level = []
@@ -106,8 +106,8 @@ func _load_state() -> void:
 		
 		if(version >= 1):
 			_building_level = data["building_level"]
-		if(version == 1):
-			_building_level.resize(17)
+		if(version == 1 || version == 2):
+			_building_level.resize(18)
 		
 		if(version >= 2):
 			_station_level = data["station_level"]

@@ -28,3 +28,9 @@ func _zoom(factor: float, where: Vector2) -> void:
 
 func _on_MiningScreen_game_started() -> void:
 	pass
+
+func _on_GameBoard_bounds_updated(min_x, max_x, min_y, max_y) -> void:
+	limit_left = -min_x
+	limit_right = -max_x
+	limit_top = -min_y
+	limit_bottom = -max_y

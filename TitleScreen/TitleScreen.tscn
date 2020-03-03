@@ -7,7 +7,7 @@
 [ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=5]
 [ext_resource path="res://TitleScreen/ParticleButton.tscn" type="PackedScene" id=6]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=2]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -55,7 +55,7 @@ visible = false
 amount = 50
 lifetime = 5.0
 visibility_rect = Rect2( -1.2839, -1.52361, 553.72, 104.182 )
-process_material = SubResource( 1 )
+process_material = SubResource( 2 )
 texture = ExtResource( 2 )
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Container"]
