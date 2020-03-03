@@ -65,7 +65,7 @@ current = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource( 1 )
-_MAX_ZOOM = 0.1
+_MAX_ZOOM = 0.05
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/BoardCamera" method="_on_MiningScreen_game_started"]
 [connection signal="game_started" from="." to="VBoxContainer/BoardContainer/BoardViewport/GameBoard" method="_on_MiningScreen_game_started"]
 [connection signal="setup" from="." to="VBoxContainer/Header/ResourcesBar" method="setup"]
