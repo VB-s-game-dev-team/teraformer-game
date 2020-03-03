@@ -336,35 +336,30 @@ margin_left = -432.0
 margin_top = -848.0
 margin_right = -272.0
 margin_bottom = -688.0
-building_names = 1
 
 [node name="BuildingSpot3" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 64.0
 margin_top = -1072.0
 margin_right = 224.0
 margin_bottom = -912.0
-building_names = 2
 
 [node name="BuildingSpot4" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -224.0
 margin_top = -624.0
 margin_right = -64.0
 margin_bottom = -464.0
-building_names = 3
 
 [node name="BuildingSpot5" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 272.0
 margin_top = -848.0
 margin_right = 432.0
 margin_bottom = -688.0
-building_names = 4
 
 [node name="BuildingSpot6" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 64.0
 margin_top = -624.0
 margin_right = 224.0
 margin_bottom = -464.0
-building_names = 5
 
 [node name="BuildingSpot7" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 848.0
@@ -372,7 +367,6 @@ margin_top = -304.0
 margin_right = 1008.0
 margin_bottom = -144.0
 rect_rotation = 90.0
-building_names = 6
 
 [node name="BuildingSpot8" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 1072.0
@@ -380,7 +374,6 @@ margin_top = -80.0
 margin_right = 1232.0
 margin_bottom = 80.0
 rect_rotation = 90.0
-building_names = 7
 
 [node name="BuildingSpot9" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 848.0
@@ -388,7 +381,6 @@ margin_top = 144.0
 margin_right = 1008.0
 margin_bottom = 304.0
 rect_rotation = 90.0
-building_names = 8
 
 [node name="BuildingSpot10" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 624.0
@@ -396,7 +388,6 @@ margin_top = -80.0
 margin_right = 784.0
 margin_bottom = 80.0
 rect_rotation = 90.0
-building_names = 9
 
 [node name="BuildingSpot11" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 304.0
@@ -404,7 +395,6 @@ margin_top = 848.0
 margin_right = 464.0
 margin_bottom = 1008.0
 rect_rotation = 180.0
-building_names = 10
 
 [node name="BuildingSpot12" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 80.0
@@ -412,7 +402,6 @@ margin_top = 1072.0
 margin_right = 240.0
 margin_bottom = 1232.0
 rect_rotation = 180.0
-building_names = 11
 
 [node name="BuildingSpot13" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -144.0
@@ -420,7 +409,6 @@ margin_top = 848.0
 margin_right = 16.0
 margin_bottom = 1008.0
 rect_rotation = 180.0
-building_names = 12
 
 [node name="BuildingSpot14" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = 80.0
@@ -428,7 +416,6 @@ margin_top = 624.0
 margin_right = 240.0
 margin_bottom = 784.0
 rect_rotation = 180.0
-building_names = 13
 
 [node name="BuildingSpot15" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -848.0
@@ -436,7 +423,6 @@ margin_top = 304.0
 margin_right = -688.0
 margin_bottom = 464.0
 rect_rotation = -90.0
-building_names = 14
 
 [node name="BuildingSpot16" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -624.0
@@ -444,7 +430,6 @@ margin_top = 80.0
 margin_right = -464.0
 margin_bottom = 240.0
 rect_rotation = -90.0
-building_names = 15
 
 [node name="BuildingSpot17" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -1072.0
@@ -452,7 +437,6 @@ margin_top = 80.0
 margin_right = -912.0
 margin_bottom = 240.0
 rect_rotation = -90.0
-building_names = 16
 
 [node name="BuildingSpot18" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots" instance=ExtResource( 8 )]
 margin_left = -848.0
@@ -460,7 +444,6 @@ margin_top = -144.0
 margin_right = -688.0
 margin_bottom = 16.0
 rect_rotation = -90.0
-building_names = 17
 
 [node name="Camera2D" type="Camera2D" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport"]
 position = Vector2( 0, -768 )
