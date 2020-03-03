@@ -45,5 +45,4 @@ func _on_GameBoard_bounds_updated(min_x, max_x, min_y, max_y) -> void:
 	
 	var size := get_viewport_rect().size
 	_min_zoom = min((limit_right - limit_left) / size.x, (limit_bottom - limit_top) / size.y)
-	_min_zoom *= 2.0 / 3.0
 	_clamp_pos()
