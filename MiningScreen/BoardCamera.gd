@@ -1,6 +1,8 @@
 extends Camera2D
 
 
+signal transform_changed(t)
+
 export(float) var _MAX_ZOOM: float = 1 / 50.0
 var _min_zoom: float = 1
 
@@ -36,6 +38,7 @@ func _clamp_pos() -> void:
 		max(_limit_left, min(_limit_right - (_size.x * zoom.x), position.x))
 	position.y = \
 		max(_limit_top, min(_limit_bottom - (_size.y * zoom.y), position.y))
+	emit_signal("transform_changed", Rect2(position, zoom))
 
 func _zoom(factor: float, where: Vector2) -> void:
 	if factor < 0:

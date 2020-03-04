@@ -23,10 +23,18 @@ var _max_y: int
 
 var _stone_generator := OpenSimplexNoise.new()
 
+var _mouse_transform := Rect2(0, 0, 1, 1)
+
 func _ready() -> void:
 	_stone_generator.seed = randi()
 	_stone_generator.octaves = 1
 	_stone_generator.period = 1
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		$Sprite.position = \
+			event.position * _mouse_transform.size.x + _mouse_transform.position
+		$Sprite.scale = _mouse_transform.size
 
 func _on_MiningScreen_game_started() -> void:
 	clear()
@@ -80,3 +88,7 @@ func _set_tile(x: int, y: int, v: int) -> void:
 
 func _put_random_color(x: int, y: int) -> void:
 	_set_tile(x, y, _random_color())
+
+
+func _on_BoardCamera_transform_changed(t) -> void:
+	_mouse_transform = t
