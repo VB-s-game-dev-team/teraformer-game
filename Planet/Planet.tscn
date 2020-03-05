@@ -12,11 +12,11 @@
 [ext_resource path="res://Planet/BuildingDialog.gd" type="Script" id=10]
 [ext_resource path="res://Planet/building_spot/buildingSpotMenu.png" type="Texture" id=11]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -167,7 +167,7 @@ margin_left = 32.0
 margin_top = 20.0
 margin_right = 416.0
 margin_bottom = 188.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
 text = "..."
 __meta__ = {
 "_edit_use_anchors_": false
@@ -178,7 +178,7 @@ margin_left = 32.0
 margin_top = 164.0
 margin_right = 416.0
 margin_bottom = 252.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
 text = "..."
 __meta__ = {
 "_edit_use_anchors_": false
@@ -226,7 +226,7 @@ margin_left = 16.0
 margin_top = 144.0
 margin_right = 240.0
 margin_bottom = 240.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Shop"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -255,7 +255,7 @@ __meta__ = {
 [node name="MineButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/MineStation"]
 margin_right = 256.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Mine Station"
 flat = true
 __meta__ = {
@@ -285,7 +285,7 @@ __meta__ = {
 [node name="BattleButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BattleStation"]
 margin_right = 256.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Battle Station"
 flat = true
 __meta__ = {
@@ -316,7 +316,7 @@ __meta__ = {
 margin_top = 6.10352e-05
 margin_right = 256.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "TR Station"
 flat = true
 __meta__ = {
