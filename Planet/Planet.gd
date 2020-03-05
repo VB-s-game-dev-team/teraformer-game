@@ -26,8 +26,6 @@ func _ready() -> void:
 	
 	_setup_building_data()
 	
-	ResourcesBar.setup(global_stuff)
-	
 	for i in range(len(BuildingSpots.get_children())):
 		BuildingSpots.get_child(i).building_idx = i
 	
