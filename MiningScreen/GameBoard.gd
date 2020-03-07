@@ -12,7 +12,7 @@ enum _tiles{
 	STONE = 6
 }
 
-export(int) var _INIT_SIZE: int = 500
+export(int) var _INIT_SIZE: int = 5
 
 export(float) var _tile_size: float
 
