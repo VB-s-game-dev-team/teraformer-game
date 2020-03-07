@@ -8,6 +8,7 @@ var rotation_position := 0
 var _total_delta := 0.0
 var _max_delta := 1.0  # Duration
 
+# Process
 func _process(delta: float) -> void:
 	if _total_delta <= _max_delta:
 		_total_delta += delta
