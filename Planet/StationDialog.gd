@@ -1,5 +1,6 @@
 extends Control
 
+# Other node references
 onready var Planet := self.get_owner()
 
 onready var LeftRotateButton := Planet.get_node("MainContainer/PlanetContainer/LeftRotateButton")
@@ -30,9 +31,13 @@ var _info_text3 := "Effect: %s \n\n"
 func _ready() -> void:
 	pass
 
+# Type of station
 enum StationType {MINE, BATTLE, TR}
 
-func _set_building_data() -> void:
+# Gets data of buildings around this station (name and level) to display
+# it in the dialog. Later, it will also display the actual effect of the
+# building, e.g. adds 3 power-ups of a given type, once the effects exist
+func _get_building_data() -> void:
 	var _start_idx := 6 + 4 * _station_idx
 	for i in range(_start_idx, _start_idx + 4):
 		var lvl = Planet.global_stuff.get_building_level(i)
@@ -40,6 +45,7 @@ func _set_building_data() -> void:
 		_building_levels.append(lvl)
 		_building_names.append(name)
 
+# Sets contents pf the dialog
 func _set_window_contents() -> void:
 	_station_name = Planet.station_names[_station_idx]
 	_station_level = Planet.global_stuff.get_station_level(_station_idx)
@@ -50,6 +56,7 @@ func _set_window_contents() -> void:
 		_station_price = -1  # Means max level
 		_station_required_level = -1  # Means max level
 
+# Sets information about the station itself to display inthe dialog
 func _set_station_info_text() -> void:
 	var is_max := _station_required_level == -1 or _station_price == -1
 	var price_text := "-" if is_max else str(_station_price)
@@ -58,6 +65,7 @@ func _set_station_info_text() -> void:
 	var action_text := " " if _station_level == 0 else "Upgrading: " + upgrading_text
 	StationInfo1.text = _info_text1 % [_station_name, price_text, level_req_text, action_text]
 
+# Sets information about boost buildings to display in the dialog
 func _set_buildings_info_text() -> void:
 	var text := ""
 	for i in range(len(_building_levels)):
@@ -65,10 +73,11 @@ func _set_buildings_info_text() -> void:
 		text += _info_text3 % ["------"]
 	StationInfo2.text = text
 
+# All processes to open dialog with all data in it
 func _open_dialog_window(idx: int) -> void:
 	_station_idx = idx
 	_set_window_contents()
-	_set_building_data()
+	_get_building_data()
 	_set_station_info_text()
 	_set_buildings_info_text()
 	_switch_dialog_to(true)
@@ -82,6 +91,7 @@ func _switch_dialog_to(on: bool) -> void:
 # Different buying possibilities that can occur
 enum Buying {POSSIBLE, NOT_ENOUGH_CC, NOT_ENOUGH_LVL, MAX_LVL}
 
+# Checks the required level and price, also max level 
 func _is_required_level_and_price() -> int:
 	var bought_station_level = Planet.global_stuff.get_station_level(_station_idx) + 1 as int 
 	if bought_station_level >= len(Planet.station_level_requirements[_station_idx]):
@@ -94,6 +104,7 @@ func _is_required_level_and_price() -> int:
 	else:
 		return Buying.NOT_ENOUGH_LVL
 
+# Closing the menu
 func _on_StationDialogCloseButton_pressed() -> void:
 	_station_idx = -1
 	_switch_dialog_to(false)
@@ -103,15 +114,7 @@ func _on_StationDialogCloseButton_pressed() -> void:
 	NotEnoughLevelMessage.visible = false
 	MaxLevelMessage.visible = false
 
-func _on_MineButton_pressed() -> void:
-	_open_dialog_window(StationType.MINE)
-
-func _on_BattleButton_pressed() -> void:
-	_open_dialog_window(StationType.BATTLE)
-
-func _on_TRButton_pressed() -> void:
-	_open_dialog_window(StationType.TR)
-
+# Accepting the purchase
 func _on_StationDialogAcceptButton_pressed() -> void:
 	match _is_required_level_and_price():
 		Buying.POSSIBLE:
@@ -125,4 +128,28 @@ func _on_StationDialogAcceptButton_pressed() -> void:
 		Buying.NOT_ENOUGH_CC:
 			NotEnoughMoneyMessage.visible = true
 		_:
-			print("!ERROR! Something didn't go as planned !ERROR!")
+			print("WRONKK: There is no station with index " + str(_station_idx))
+
+# Playing the minigame associated with this station
+func _on_StationDialogPlayButton_pressed() -> void:
+	match _station_idx:
+		StationType.MINE:
+			Planet.global_stuff.set_screen("MiningScreen")
+		StationType.BATTLE:
+			# Planet.global_stuff.set_screen("BattleScreen")
+			pass
+		StationType.TR:
+#			Planet.global_stuff.set_screen("TRScreen")
+			pass
+		_:
+			print("WRONKK: There is no station with index " + str(_station_idx))
+
+# On pressed functions which set the dialog up to receive correct data
+func _on_MineButton_pressed() -> void:
+	_open_dialog_window(StationType.MINE)
+
+func _on_BattleButton_pressed() -> void:
+	_open_dialog_window(StationType.BATTLE)
+
+func _on_TRButton_pressed() -> void:
+	_open_dialog_window(StationType.TR)

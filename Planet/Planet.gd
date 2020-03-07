@@ -1,19 +1,23 @@
 extends Control
 
+# Node references
 onready var global_stuff: GlobalStuff
 onready var ResourcesBar = $MainContainer/Header/ResourcesBar
 onready var BuildingDialog = $BuildingDialog
 onready var BuildingSpots = $MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots
 
+# Building images
 const img_path := "res://Planet/building_spot/building_images/"
 const img_suffix := ".png"
 var building_images := []
 
+# All the building data
 var building_spot_names: Array
 var building_descriptions: Array
 var building_level_requirements: Array
 var building_prices: Array
 
+# All the station data
 var station_names: Array
 var station_level_requirements: Array
 var station_prices: Array
@@ -41,7 +45,10 @@ func _ready() -> void:
 	for i in range(len(building_spot_names)):
 		building_images[i] = load(img_path + building_spot_names[i] + img_suffix)
 
-# Setup the building data
+# Setup the building and station data
+# All the data is located inside .json files in the Planet directory
+# At a later stage, these might need to be moved into res folder, if
+# Used by other scenes as well. For now, they remain here.
 func _setup_building_data() -> void:
 	var file = File.new()
 	

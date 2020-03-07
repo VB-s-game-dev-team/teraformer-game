@@ -2,15 +2,18 @@ extends Control
 
 var _global_stuff: GlobalStuff
 
+# Other node references
 onready var CosmicCreditsValue = $MarginContainer/LabelContainer/CosmicCreditsValue
 onready var StarDustValue = $MarginContainer/LabelContainer/StarDustValue
 onready var LevelValue = $MarginContainer/LabelContainer/LevelValue
 onready var XPValue = $MarginContainer/LabelContainer/XPValue
 
+# Ready
 func _ready() -> void:
 	_global_stuff = get_tree().root.get_child(0)
 	call_deferred("setup")
 
+# Connecting to all the "changed" signals from GlobalStuff
 func setup() -> void:
 	_global_stuff.connect("cosmic_credits_count_changed", self, "_update_values")
 	_global_stuff.connect("star_dust_count_changed", self, "_update_values")
@@ -18,6 +21,7 @@ func setup() -> void:
 	_global_stuff.connect("level_changed", self, "_update_values")
 	_update_values()
 
+# Updating the values shown on the resource bar 
 func _update_values():
 	CosmicCreditsValue.text = str(_global_stuff.cosmic_credits_count)
 	StarDustValue.text = str(_global_stuff.star_dust_count)

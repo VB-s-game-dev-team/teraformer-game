@@ -1,9 +1,10 @@
 extends Node2D
 
+# Rotation variables
 var _planet_rotation_speed := 1.0
 var _planet_rotation_direction := 0
 var _was_rotating := false
-var rotation_position := 0
+var rotation_position := 0  # Used for rotation fixing
 
 var _total_delta := 0.0
 var _max_delta := 1.0  # Duration
@@ -28,16 +29,17 @@ func _initiate_rotation(new_direction: int)	-> void:
 # Fix any rotation errors and enable input 
 func _terminate_rotation() -> void:
 	get_tree().get_root().set_disable_input(false)
-	fix_rotation_error()
+	_fix_rotation_error()
 	_was_rotating = false
 
-func fix_rotation_error() -> void:
+# Fixes the rotation error caused by random factors
+func _fix_rotation_error() -> void:
 	rotation = rotation_position * 0.5 * PI
 
-
+# Rotate clockwise
 func _on_LeftRotateButton_button_up() -> void:
 	_initiate_rotation(1)
 
-
+# Rotate counterclockwise
 func _on_RightRotateButton_button_up() -> void:
 	_initiate_rotation(-1)

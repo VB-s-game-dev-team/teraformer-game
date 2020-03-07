@@ -88,7 +88,7 @@ func _on_BuildingDialogAcceptButton_pressed() -> void:
 		Buying.NOT_ENOUGH_CC:
 			NotEnoughMoneyMessage.visible = true
 		_:
-			print("!ERROR! Something didn't go as planned !ERROR!")
+			print("WRONKK: There is no building with index " + str(selected_idx))
 
 # Checks the required level and price, also max level
 func _is_required_level_and_price() -> int:
