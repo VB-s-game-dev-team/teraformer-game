@@ -9,8 +9,6 @@ const img_path := "res://Planet/building_spot/building_images/"
 const img_suffix := ".png"
 var building_images := []
 
-#var building_data: Dictionary
-
 var building_spot_names: Array
 var building_descriptions: Array
 var building_level_requirements: Array
