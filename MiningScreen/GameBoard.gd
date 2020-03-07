@@ -3,6 +3,8 @@ extends TileMap
 signal bounds_updated(min_x, max_x, min_y, max_y)
 
 enum _tiles{
+	EMPTY = -2,
+	CLEARED = -1,
 	HIDEN = 0,
 	YELLOW = 1,
 	RED = 2,
@@ -31,10 +33,14 @@ func _ready() -> void:
 	_stone_generator.period = 5
 
 func _input(event: InputEvent) -> void:
+	var pos: Vector2
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		var pos = _tile_pos(_transform_mouse_pos(event.position))
-		_break_tile(pos.x, pos.y)
+		pos = _tile_pos(_transform_mouse_pos(event.position))
 	
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and get_cellv(pos) != _tiles.HIDEN:
+			_break_tile(pos.x, pos.y)
+			print(pos)
 
 func _on_MiningScreen_game_started() -> void:
 	clear()
@@ -46,10 +52,10 @@ func _random_color() -> int:
 	return randi() % 4 + 1
 
 func _break_tile(x: int, y: int) -> void:
-	_set_tile(x, y, -1)
 	for i in range(x - 1, x + 2):
 		for j in range(y - 1, y + 2):
 			_uncover_tile(i, j)
+	_set_tile(x, y, _tiles.EMPTY)
 
 func _uncover_tile(x: int, y: int):
 	if get_cell(x, y) == _tiles.HIDEN:
@@ -115,7 +121,7 @@ func _set_tile(x: int, y: int, v: int) -> void:
 func _fix_exposed_tiles(rx, ry):
 	for x in rx:
 		for y in ry:
-			if get_cell(x, y) == -1:
+			if get_cell(x, y) == _tiles.CLEARED:
 				#not using _set_tile() to avoid trigering bound update again
 				set_cell(x, y, _tiles.HIDEN)
 
@@ -126,6 +132,10 @@ func _transform_mouse_pos(pos: Vector2) -> Vector2:
 	return pos * _mouse_transform.size.x + _mouse_transform.position
 
 func _tile_pos(pos: Vector2) -> Vector2:
+	if pos.x < 0:
+		pos.x -= _tile_size
+	if pos.y < 0:
+		pos.y -= _tile_size
 	return pos / _tile_size
 
 func _on_BoardCamera_transform_changed(t) -> void:
