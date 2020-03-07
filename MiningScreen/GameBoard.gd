@@ -32,9 +32,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		$Sprite.position = \
-			event.position * _mouse_transform.size.x + _mouse_transform.position
-		$Sprite.scale = _mouse_transform.size
+		var pos = _tile_pos(_transform_mouse_pos(event.position))
+		_break_tile(pos.x, pos.y)
+	
 
 func _on_MiningScreen_game_started() -> void:
 	clear()
@@ -67,28 +67,66 @@ func _set_tile(x: int, y: int, v: int) -> void:
 		return
 	
 	var changed := false
+	var changed_x: int = 0
+	var changed_y: int = 0
+	
 	if _min_x > x:
+		changed_x = x - _min_x
 		_min_x = x
 		changed = true
 	if _max_x < x:
+		changed_x = x - _max_x
 		_max_x = x
 		changed = true
 	if _min_y > y:
+		changed_y = y - _min_y
 		_min_y = y
 		changed = true
 	if _max_y < y:
+		changed_y = y - _max_y
 		_max_y = y
 		changed = true
 	
 	if changed:
+		var rx
+		var ry
+		if changed_x != 0:
+			ry = range(_min_y, _max_y + 1)
+			if changed_x < 0:
+				rx = range(_min_x, _min_x - changed_x + 1)
+			else:
+				rx = range(_max_x - changed_x + 1, _max_x + 1)
+			_fix_exposed_tiles(rx, ry)
+		
+		if changed_y != 0:
+			rx = range(_min_x, _max_x + 1)
+			if changed_y < 0:
+				ry = range(_min_y, _min_y - changed_y + 1)
+			else:
+				ry = range(_max_y - changed_y + 1, _max_y + 1)
+			_fix_exposed_tiles(rx, ry)
+		
 		emit_signal("bounds_updated", _min_x * _tile_size, (_max_x + 1) * _tile_size, 
 			_min_y * _tile_size, (_max_y + 1) * _tile_size)
+		
 	
 	set_cell(x, y, v)
+
+func _fix_exposed_tiles(rx, ry):
+	for x in rx:
+		for y in ry:
+			if get_cell(x, y) == -1:
+				#not using _set_tile() to avoid trigering bound update again
+				set_cell(x, y, _tiles.HIDEN)
 
 func _put_random_color(x: int, y: int) -> void:
 	_set_tile(x, y, _random_color())
 
+func _transform_mouse_pos(pos: Vector2) -> Vector2:
+	return pos * _mouse_transform.size.x + _mouse_transform.position
+
+func _tile_pos(pos: Vector2) -> Vector2:
+	return pos / _tile_size
 
 func _on_BoardCamera_transform_changed(t) -> void:
 	_mouse_transform = t
