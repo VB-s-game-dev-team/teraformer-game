@@ -12,7 +12,7 @@ enum _tiles{
 	STONE = 6
 }
 
-export(int) var _INIT_SIZE: int = 5
+export(int) var _INIT_SIZE: int = 500
 
 export(float) var _tile_size: float
 
@@ -28,7 +28,7 @@ var _mouse_transform := Rect2(0, 0, 1, 1)
 func _ready() -> void:
 	_stone_generator.seed = randi()
 	_stone_generator.octaves = 1
-	_stone_generator.period = 1
+	_stone_generator.period = 5
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
@@ -46,7 +46,7 @@ func _random_color() -> int:
 	return randi() % 4 + 1
 
 func _break_tile(x: int, y: int) -> void:
-	_put_random_color(x, y)
+	_set_tile(x, y, -1)
 	for i in range(x - 1, x + 2):
 		for j in range(y - 1, y + 2):
 			_uncover_tile(i, j)
@@ -54,7 +54,7 @@ func _break_tile(x: int, y: int) -> void:
 func _uncover_tile(x: int, y: int):
 	if get_cell(x, y) == _tiles.HIDEN:
 		var tile: int = _tiles.DIRT
-		if _stone_generator.get_noise_2d(x, y) > y / 1000.0:
+		if _stone_generator.get_noise_2d(x, y) < y / 500.0:
 			tile = _tiles.STONE
 		_set_tile(x, y, tile)
 	for i in range(x - 1, x + 2):

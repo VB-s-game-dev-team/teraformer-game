@@ -11,7 +11,7 @@ var _limit_right: int
 var _limit_top: int
 var _limit_bottom: int
 
-var _size: Vector2
+var _size := Vector2(1, 1)
 
 func _ready() -> void:
 	call_deferred("_actually_ready")
