@@ -9,15 +9,15 @@ var _selected_required_level: int
 var _selected_my_level: int
 
 # Other nodes
-onready var Planet := get_parent().get_parent().get_parent()
-onready var BuildingSpots := get_parent().get_node("ViewportContainer/Viewport/PlanetRotationNode/BuildingSpots")
+onready var Planet := self.get_owner()
+onready var PlanetRotationNode := get_parent().get_node("PlanetRotationNode")
+onready var BuildingSpots := PlanetRotationNode.get_node("BuildingSpots")
 
-onready var PlanetRotationNode := get_parent().get_node("ViewportContainer/Viewport/PlanetRotationNode")
-onready var LeftRotateButton := get_parent().get_node("LeftRotateButton")
-onready var RightRotateButton := get_parent().get_node("RightRotateButton")
+onready var LeftRotateButton := Planet.get_node("MainContainer/PlanetContainer/LeftRotateButton")
+onready var RightRotateButton := Planet.get_node("MainContainer/PlanetContainer/RightRotateButton")
 
-onready var BuildingInfo1 := $BuildingInfo1
-onready var BuildingInfo2 := $BuildingInfo2
+onready var BuildingInfo1 := $BuyMenu/BuildingInfo1
+onready var BuildingInfo2 := $BuyMenu/BuildingInfo2
 
 onready var NotEnoughMoneyMessage := $BuyMenu/NotEnoughMoneyMessage
 onready var NotEnoughLevelMessage := $BuyMenu/NotEnoughLevelMessage
@@ -107,7 +107,6 @@ func _is_required_level_and_price() -> int:
 func _switch_dialog_to(on: bool) -> void:
 	LeftRotateButton.visible = !on
 	RightRotateButton.visible = !on
-	PlanetRotationNode.visible = !on
 	BuildingInfo1.visible = on
 	BuildingInfo2.visible = on
 	visible = on
