@@ -14,6 +14,10 @@ var building_descriptions: Array
 var building_level_requirements: Array
 var building_prices: Array
 
+var station_names: Array
+var station_level_requirements: Array
+var station_prices: Array
+
 # Ready
 func _ready() -> void:
 	global_stuff = get_parent() as GlobalStuff
@@ -34,15 +38,25 @@ func _ready() -> void:
 # Setup the building data
 func _setup_building_data() -> void:
 	var file = File.new()
+	
 	file.open("res://Planet/building_data.json", File.READ)
-	var text = file.get_as_text()
-	var building_data = parse_json(text)
+	var text1 = file.get_as_text()
+	var building_data = parse_json(text1)
+	
+	file.open("res://Planet/station_data.json", File.READ)
+	var text2 = file.get_as_text()
+	var station_data = parse_json(text2)
+	
 	file.close()
 	
 	building_spot_names = building_data["building_spot_names"]
 	building_descriptions = building_data["building_descriptions"]
 	building_level_requirements = building_data["building_level_requirements"]
 	building_prices = building_data["building_prices"]
+	
+	station_names = station_data["station_names"]
+	station_level_requirements = station_data["station_level_requirements"]
+	station_prices = station_data["station_prices"]
 
 # Process
 func _process(delta: float) -> void:
@@ -50,20 +64,6 @@ func _process(delta: float) -> void:
 	
 func _on_MainMenuButton_button_up() -> void:
 	global_stuff.set_screen("TitleScreen")
-	
-func _on_MineButton_button_down() -> void:
-	
-	# Handle all of the bonuses, power-ups and other parameters
-	# (if needed)
-	# In the future
-	
-	global_stuff.set_screen("MiningScreen")
-
-func _on_BattleButton_button_down() -> void:
-	pass # Replace with function body.
-
-func _on_TRButton_button_down() -> void:
-	pass # Replace with function body.
 
 func _on_ShopButton_button_down() -> void:
 	pass # Replace with function body.

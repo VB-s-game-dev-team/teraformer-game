@@ -1,13 +1,5 @@
 extends Control
 
-# Variables pulled from elsewhere and used here
-var selected_idx := -1
-var _selected_price: int
-var _selected_name: String
-var _selected_description: String
-var _selected_required_level: int
-var _selected_my_level: int
-
 # Other nodes
 onready var Planet := self.get_owner()
 onready var PlanetRotationNode := get_parent().get_node("PlanetRotationNode")
@@ -22,6 +14,14 @@ onready var BuildingInfo2 := $BuyMenu/BuildingInfo2
 onready var NotEnoughMoneyMessage := $BuyMenu/NotEnoughMoneyMessage
 onready var NotEnoughLevelMessage := $BuyMenu/NotEnoughLevelMessage
 onready var MaxLevelMessage := $BuyMenu/MaxLevelMessage
+
+# Variables pulled from elsewhere and used here
+var selected_idx := -1
+var _selected_price: int
+var _selected_name: String
+var _selected_description: String
+var _selected_required_level: int
+var _selected_my_level: int
 
 # Info text strings
 var _info_text1 := "Do you wish to buy this building? \nName: %s \nDescription: %s"
@@ -88,7 +88,7 @@ func _on_BuildingDialogAcceptButton_pressed() -> void:
 		Buying.NOT_ENOUGH_CC:
 			NotEnoughMoneyMessage.visible = true
 		_:
-			print("!ERROR! Buying didn't go as planned !ERROR!")
+			print("!ERROR! Something didn't go as planned !ERROR!")
 
 # Checks the required level and price, also max level
 func _is_required_level_and_price() -> int:
@@ -107,6 +107,4 @@ func _is_required_level_and_price() -> int:
 func _switch_dialog_to(on: bool) -> void:
 	LeftRotateButton.visible = !on
 	RightRotateButton.visible = !on
-	BuildingInfo1.visible = on
-	BuildingInfo2.visible = on
 	visible = on
