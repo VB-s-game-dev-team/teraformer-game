@@ -484,6 +484,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="StationInfo1" type="RichTextLabel" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
+margin_left = 25.0
+margin_top = 50.0
+margin_right = 409.0
+margin_bottom = 218.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="StationDialogCloseButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
 pause_mode = 2
 margin_left = 216.0
@@ -495,13 +506,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StationDialogPlayButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
+[node name="StationDialogAcceptButton" type="Button" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
 pause_mode = 2
 margin_left = 24.0
 margin_top = 400.0
 margin_right = 164.0
 margin_bottom = 456.0
 text = "Accept"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotEnoughMoneyMessage" type="Label" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 25.0
+margin_top = 370.0
+margin_right = 505.0
+margin_bottom = 426.0
+text = "Not enough cosmic credits!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotEnoughLevelMessage" type="Label" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 25.0
+margin_top = 370.0
+margin_right = 345.0
+margin_bottom = 426.0
+text = "Insufficient level!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxLevelMessage" type="Label" parent="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu"]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 25.0
+margin_top = 370.0
+margin_right = 409.0
+margin_bottom = 426.0
+text = "Building at max level!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -527,4 +574,5 @@ __meta__ = {
 [connection signal="pressed" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/BuildingDialog/BuyMenu/BuildingDialogCloseButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/BuildingDialog" method="_on_BuildingDialogCloseButton_pressed"]
 [connection signal="pressed" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/BuildingDialog/BuyMenu/BuildingDialogAcceptButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/BuildingDialog" method="_on_BuildingDialogAcceptButton_pressed"]
 [connection signal="pressed" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu/StationDialogCloseButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog" method="_on_StationDialogCloseButton_pressed"]
+[connection signal="pressed" from="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog/StationMenu/StationDialogAcceptButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/StationDialog" method="_on_StationDialogAcceptButton_pressed"]
 [connection signal="button_up" from="MainContainer/PlanetContainer/RightRotateButton" to="MainContainer/PlanetContainer/ViewportContainer/Viewport/PlanetRotationNode" method="_on_RightRotateButton_button_up"]

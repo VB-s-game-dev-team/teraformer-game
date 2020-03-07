@@ -22,9 +22,15 @@ var station_prices: Array
 func _ready() -> void:
 	global_stuff = get_parent() as GlobalStuff
 	
-	# Values for testing
+	#############################################
+	# VALUES FOR TESTING (also for setup - some)
 	global_stuff.level = 1
 	global_stuff.cosmic_credits_count = 5000
+	for i in range(18):
+		global_stuff.set_building_level(i, 0)
+	for i in range(3):
+		global_stuff.set_station_level(i, 1)
+	#############################################
 	
 	_setup_building_data()
 	
