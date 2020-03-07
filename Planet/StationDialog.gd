@@ -6,6 +6,7 @@ onready var LeftRotateButton := Planet.get_node("MainContainer/PlanetContainer/L
 onready var RightRotateButton := Planet.get_node("MainContainer/PlanetContainer/RightRotateButton")
 
 onready var StationInfo1 := $StationMenu/StationInfo1
+onready var StationInfo2 := $StationMenu/StationInfo2
 
 onready var NotEnoughMoneyMessage := $StationMenu/NotEnoughMoneyMessage
 onready var NotEnoughLevelMessage := $StationMenu/NotEnoughLevelMessage
@@ -18,13 +19,26 @@ var _station_price: int
 var _station_level: int
 var _station_required_level: int
 
+var _building_levels: Array
+var _building_names: Array
+
 var _info_text1 := "%s \nPrice: %s \nRequired level: %s \n%s"
+var _info_text2 := "%s at level %s \n"
+var _info_text3 := "Effect: %s \n\n"
 
 # Ready
 func _ready() -> void:
 	pass
 
 enum StationType {MINE, BATTLE, TR}
+
+func _set_building_data() -> void:
+	var _start_idx := 6 + 4 * _station_idx
+	for i in range(_start_idx, _start_idx + 4):
+		var lvl = Planet.global_stuff.get_building_level(i)
+		var name = Planet.building_spot_names[i]
+		_building_levels.append(lvl)
+		_building_names.append(name)
 
 func _set_window_contents() -> void:
 	_station_name = Planet.station_names[_station_idx]
@@ -36,7 +50,7 @@ func _set_window_contents() -> void:
 		_station_price = -1  # Means max level
 		_station_required_level = -1  # Means max level
 
-func _set_station_info_text():
+func _set_station_info_text() -> void:
 	var is_max := _station_required_level == -1 or _station_price == -1
 	var price_text := "-" if is_max else str(_station_price)
 	var level_req_text := "-" if is_max else str(_station_required_level)
@@ -44,10 +58,19 @@ func _set_station_info_text():
 	var action_text := " " if _station_level == 0 else "Upgrading: " + upgrading_text
 	StationInfo1.text = _info_text1 % [_station_name, price_text, level_req_text, action_text]
 
+func _set_buildings_info_text() -> void:
+	var text := ""
+	for i in range(len(_building_levels)):
+		text += _info_text2 % [_building_names[i], _building_levels[i]]
+		text += _info_text3 % ["------"]
+	StationInfo2.text = text
+
 func _open_dialog_window(idx: int) -> void:
 	_station_idx = idx
 	_set_window_contents()
+	_set_building_data()
 	_set_station_info_text()
+	_set_buildings_info_text()
 	_switch_dialog_to(true)
 
 # Opens / closes the dialog	
@@ -74,6 +97,8 @@ func _is_required_level_and_price() -> int:
 func _on_StationDialogCloseButton_pressed() -> void:
 	_station_idx = -1
 	_switch_dialog_to(false)
+	_building_levels = []
+	_building_names = []
 	NotEnoughMoneyMessage.visible = false
 	NotEnoughLevelMessage.visible = false
 	MaxLevelMessage.visible = false
