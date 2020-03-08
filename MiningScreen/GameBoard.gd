@@ -45,7 +45,8 @@ func _input(event: InputEvent) -> void:
 		pos = _tile_pos(_transform_mouse_pos(event.position))
 	
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and get_cellv(pos) != tiles.HIDEN:
+		if event.button_index == BUTTON_LEFT and event.pressed \
+			and get_cellv(pos) != tiles.HIDEN:
 			#warning-ignore:narrowing_conversion 
 			#warning-ignore:narrowing_conversion
 			_break_tile(pos.x, pos.y)
