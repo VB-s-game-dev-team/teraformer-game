@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "FallingTile",
+"language": "GDScript",
+"path": "res://MiningScreen/FallingTile.gd"
+}, {
+"base": "TileMap",
+"class": "GameBoard",
+"language": "GDScript",
+"path": "res://MiningScreen/GameBoard.gd"
+}, {
 "base": "Node",
 "class": "GlobalStuff",
 "language": "GDScript",
 "path": "res://GlobalStuff.gd"
 } ]
 _global_script_class_icons={
+"FallingTile": "",
+"GameBoard": "",
 "GlobalStuff": ""
 }
 

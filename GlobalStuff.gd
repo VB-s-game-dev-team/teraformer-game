@@ -70,6 +70,7 @@ func _save_state() -> void:
 		"station_level": _station_level
 	}
 	var save_file := File.new()
+	# warning-ignore:return_value_discarded
 	save_file.open("user://save.dat", File.WRITE)
 	save_file.store_line(to_json(data))
 	save_file.close()
@@ -93,6 +94,7 @@ func _load_state() -> void:
 		for i in range(0, 3):
 			_station_level[i] = 0
 	else:
+		# warning-ignore:return_value_discarded
 		save_file.open("user://save.dat", File.READ)
 		var data := parse_json(save_file.get_line()) as Dictionary
 		save_file.close()
