@@ -3,6 +3,7 @@ extends TileMap
 signal bounds_updated(min_x, max_x, min_y, max_y)
 
 enum _tiles{
+	RESERVED = -3,
 	EMPTY = -2,
 	CLEARED = -1,
 	HIDEN = 0,
