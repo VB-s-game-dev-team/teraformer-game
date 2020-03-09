@@ -28,9 +28,9 @@ func _input(event: InputEvent) -> void:
 		_clamp_pos()
 	elif event is InputEventMouseButton:
 		match event.button_index:
-			BUTTON_WHEEL_UP:
+			BUTTON_WHEEL_DOWN:
 				_zoom(1.1, event.position)
-			BUTTON_WHEEL_DOWN: 
+			BUTTON_WHEEL_UP: 
 				_zoom(-1.1, event.position)
 
 func _clamp_pos() -> void:
