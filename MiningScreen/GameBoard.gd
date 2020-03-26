@@ -32,6 +32,9 @@ var _mouse_transform := Rect2(0, 0, 1, 1)
 
 var _falling_tile_resource: PackedScene
 
+var tiles_waiting_for_fall = []
+
+
 func _ready() -> void:
 	_falling_tile_resource = load("res://MiningScreen/FallingTile.tscn")
 	
@@ -47,9 +50,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed \
 			and get_cellv(pos) != tiles.HIDEN:
-			#warning-ignore:narrowing_conversion 
-			#warning-ignore:narrowing_conversion
-			_break_tile(pos.x, pos.y)
+			_break_tile(int(pos.x), int(pos.y))
 			print(pos)
 
 func _on_MiningScreen_game_started() -> void:
@@ -125,7 +126,8 @@ func _set_tile(x: int, y: int, v: int) -> void:
 				ry = range(_max_y - changed_y + 1, _max_y + 1)
 			_fix_exposedtiles(rx, ry)
 		
-		emit_signal("bounds_updated", _min_x * _tile_size, (_max_x + 1) * _tile_size, 
+		emit_signal("bounds_updated", \
+			_min_x * _tile_size, (_max_x + 1) * _tile_size, \
 			_min_y * _tile_size, (_max_y + 1) * _tile_size)
 		
 	
@@ -154,9 +156,53 @@ func _tile_pos(pos: Vector2) -> Vector2:
 func _on_BoardCamera_transform_changed(t) -> void:
 	_mouse_transform = t
 
-func _begin_fall(x: int, y: int) -> void:
+func _begin_fall(x: int, y: int) -> bool:
+	var falling_tile_x: int
+	var falling_tile_y: int
+	var falling_tile_color: int
+	
+	if y == 0:
+		falling_tile_x = x
+		falling_tile_y = -1
+		falling_tile_color = tiles.YELLOW + randi() % (tiles.BLUE - tiles.YELLOW)
+	else:
+		var cell_above: int =  get_cell(x, y - 1)
+		#I will refactor this abomination later YELLOW <= color => BLUE
+		if cell_above  >= tiles.YELLOW and cell_above <= tiles.BLUE:
+			falling_tile_x = x
+			falling_tile_y = y - 1
+		else:
+			cell_above = get_cell(x - 1, y - 1)
+			if cell_above  >= tiles.YELLOW and cell_above <= tiles.BLUE:
+				falling_tile_x = x - 1
+				falling_tile_y = y - 1
+			else:
+				cell_above = get_cell(x + 1, y - 1)
+				if cell_above  >= tiles.YELLOW and cell_above <= tiles.BLUE:
+					falling_tile_x = x + 1
+					falling_tile_y = y - 1
+				else:
+					tiles_waiting_for_fall.append({"x": x, "y": y})
+					return false
+		falling_tile_color = get_cell(falling_tile_x, falling_tile_y)
+		_begin_fall(falling_tile_x, falling_tile_y)
+				
 	var falling_tile := _falling_tile_resource.instance()
 	add_child(falling_tile)
-	falling_tile.setup(0, tiles.BLUE, \
-		Vector2(x * _tile_size, y * _tile_size), \
-		Vector2(x * _tile_size, (y + 1) * _tile_size))
+	falling_tile.setup( \
+		{"x": x, "y": y, "color": falling_tile_color}, falling_tile_color, \
+		Vector2(falling_tile_x * _tile_size, falling_tile_y * _tile_size), \
+		Vector2(x * _tile_size, y * _tile_size))
+	falling_tile.connect("done", self, "_end_fall")
+	return true
+
+func _end_fall(data) -> void:
+	_set_tile(data.x, data.y, data.color)
+	call_deferred("_trigger_empty_tiles")
+
+func _trigger_empty_tiles() -> void:
+	var tmp = tiles_waiting_for_fall
+	tiles_waiting_for_fall = []
+	while tmp.size() > 0:
+		var coords = tmp.pop_back()
+		_begin_fall(coords.x, coords.y)
