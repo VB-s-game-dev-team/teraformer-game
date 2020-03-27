@@ -213,16 +213,10 @@ func _end_fall(data) -> void:
 
 func _trigger_empty_tiles() -> void:
 	var tmp = tiles_waiting_for_fall
-	#var something_happened: bool = false
 	tiles_waiting_for_fall = []
 	while tmp.size() > 0:
 		var coords = tmp.pop_back()
-		#something_happened = \
-		#	something_happened or 
 		_begin_fall(coords.x, coords.y, true)
-	
-	#if something_happened:
-	#	return
 	
 	tmp = tiles_waiting_for_fall
 	tiles_waiting_for_fall = []

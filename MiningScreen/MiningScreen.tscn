@@ -59,6 +59,14 @@ format = 1
 script = ExtResource( 7 )
 _tile_size = 16.0
 
+[node name="SelectedPoints" type="Line2D" parent="VBoxContainer/BoardContainer/BoardViewport/GameBoard"]
+z_index = 422
+width = 5.0
+default_color = Color( 0.968627, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="BoardCamera" type="Camera2D" parent="VBoxContainer/BoardContainer/BoardViewport"]
 anchor_mode = 0
 current = true
