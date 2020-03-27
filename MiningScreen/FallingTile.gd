@@ -2,7 +2,7 @@ extends Sprite
 
 class_name FallingTile
 
-signal done(id)
+signal done(data)
 
 var _data: Dictionary
 
@@ -10,7 +10,7 @@ func setup(data: Dictionary, color: int, from: Vector2, to: Vector2):
 	_data = data
 	region_rect.position.x = (color - GameBoard.tiles.YELLOW) * 16
 	position = from
-	$Tween.interpolate_property(self, "position", from, to, 0.5, \
+	$Tween.interpolate_property(self, "position", from, to, 0.2, \
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 
