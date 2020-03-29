@@ -36,7 +36,7 @@ var tiles_waiting_for_fall = []
 
 
 func _ready() -> void:
-	_falling_tile_resource = load("res://MiningScreen/FallingTile.tscn")
+	_falling_tile_resource = load("res://MiningScreen/scenes/FallingTile.tscn")
 	
 	_stone_generator.seed = randi()
 	_stone_generator.octaves = 1
@@ -51,7 +51,6 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == BUTTON_LEFT and event.pressed \
 			and get_cellv(pos) != tiles.HIDEN:
 			_break_tile(int(pos.x), int(pos.y))
-			print(pos)
 
 func _on_MiningScreen_game_started() -> void:
 	clear()

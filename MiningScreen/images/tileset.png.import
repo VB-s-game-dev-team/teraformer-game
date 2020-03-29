@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background.png-1e8e2a94a6fcabcf946c833fdf5761ff.stex"
+path="res://.import/tileset.png-c4a8493ca706374c78ddcf469dad711f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TitleScreen/background.png"
-dest_files=[ "res://.import/background.png-1e8e2a94a6fcabcf946c833fdf5761ff.stex" ]
+source_file="res://MiningScreen/images/tileset.png"
+dest_files=[ "res://.import/tileset.png-c4a8493ca706374c78ddcf469dad711f.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

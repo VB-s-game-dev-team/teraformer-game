@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "FallingTile",
 "language": "GDScript",
-"path": "res://MiningScreen/FallingTile.gd"
+"path": "res://MiningScreen/scripts/FallingTile/FallingTile.gd"
 }, {
 "base": "TileMap",
 "class": "GameBoard",
 "language": "GDScript",
-"path": "res://MiningScreen/GameBoard.gd"
+"path": "res://MiningScreen/scripts/GameBoard.gd"
 }, {
 "base": "Node",
 "class": "GlobalStuff",
