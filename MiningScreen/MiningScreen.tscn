@@ -58,12 +58,11 @@ tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 7 )
-_tile_size = 16.0
+TILE_SIZE = 16.0
 
 [node name="SelectedPoints" type="Line2D" parent="VBoxContainer/BoardContainer/BoardViewport/GameBoard"]
-z_index = 422
-width = 5.0
-default_color = Color( 0.968627, 1, 0, 1 )
+z_index = 1
+width = 0.3
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2

@@ -19,7 +19,7 @@ enum tiles{
 
 export(int) var _INIT_SIZE: int = 5
 
-export(float) var _tile_size: float
+export(float) var TILE_SIZE: float = 16
 
 var _min_x: int
 var _min_y: int
@@ -41,6 +41,8 @@ func _ready() -> void:
 	_stone_generator.seed = randi()
 	_stone_generator.octaves = 1
 	_stone_generator.period = 5
+	
+	$SelectedPoints.selected_color = tiles.RED
 
 func _input(event: InputEvent) -> void:
 	var pos: Vector2
@@ -127,8 +129,8 @@ func _set_tile(x: int, y: int, v: int) -> void:
 			_fix_exposedtiles(rx, ry)
 		
 		emit_signal("bounds_updated", \
-			_min_x * _tile_size, (_max_x + 1) * _tile_size, \
-			_min_y * _tile_size, (_max_y + 1) * _tile_size)
+			_min_x * TILE_SIZE, (_max_x + 1) * TILE_SIZE, \
+			_min_y * TILE_SIZE, (_max_y + 1) * TILE_SIZE)
 
 func _fix_exposedtiles(rx, ry):
 	for x in rx:
@@ -145,10 +147,10 @@ func _transform_mouse_pos(pos: Vector2) -> Vector2:
 
 func _tile_pos(pos: Vector2) -> Vector2:
 	if pos.x < 0:
-		pos.x -= _tile_size
+		pos.x -= TILE_SIZE
 	if pos.y < 0:
-		pos.y -= _tile_size
-	return pos / _tile_size
+		pos.y -= TILE_SIZE
+	return pos / TILE_SIZE
 
 func _on_BoardCamera_transform_changed(t) -> void:
 	_mouse_transform = t
@@ -199,8 +201,8 @@ func _begin_fall(x: int, y: int, only_down: bool = false) -> bool:
 	falling_tile.setup( \
 		{"x": x, "y": y, "color": falling_tile_color, "node": falling_tile}, \
 		falling_tile_color, \
-		Vector2(falling_tile_x * _tile_size, falling_tile_y * _tile_size), \
-		Vector2(x * _tile_size, y * _tile_size))
+		Vector2(falling_tile_x * TILE_SIZE, falling_tile_y * TILE_SIZE), \
+		Vector2(x * TILE_SIZE, y * TILE_SIZE))
 	falling_tile.connect("done", self, "_end_fall")
 	return true
 
