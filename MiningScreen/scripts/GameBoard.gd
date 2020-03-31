@@ -20,6 +20,7 @@ enum tiles{
 export(int) var _INIT_SIZE: int = 5
 
 export(float) var TILE_SIZE: float = 16
+export(int) var MIN_CHAIN_LENGTH: int = 3
 
 var _min_x: int
 var _min_y: int
@@ -32,17 +33,24 @@ var _mouse_transform := Rect2(0, 0, 1, 1)
 
 var _falling_tile_resource: PackedScene
 
-var tiles_waiting_for_fall = []
+var _tiles_waiting_for_fall = []
+var _tiles_trigered := false
+
+var selected_points: Line2D = $SelectedPoints as Line2D
+var selected_point_set := Dictionary()
 
 
 func _ready() -> void:
 	_falling_tile_resource = load("res://MiningScreen/scenes/FallingTile.tscn")
 	
+	selected_points = $SelectedPoints as Line2D
+	
 	_stone_generator.seed = randi()
 	_stone_generator.octaves = 1
 	_stone_generator.period = 5
-	
-	$SelectedPoints.selected_color = tiles.RED
+
+func _process(delta: float) -> void:
+	_tiles_trigered = false
 
 func _input(event: InputEvent) -> void:
 	var pos: Vector2
@@ -50,9 +58,14 @@ func _input(event: InputEvent) -> void:
 		pos = _tile_pos(_transform_mouse_pos(event.position))
 	
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed \
-			and get_cellv(pos) != tiles.HIDEN:
-			_break_tile(int(pos.x), int(pos.y))
+		if event.button_index == BUTTON_LEFT:
+			if event.pressed:
+				_add_selected_point(pos)
+			else:
+				_break_selected_tiles()
+	elif event is InputEventMouseMotion:
+		if event.button_mask == BUTTON_LEFT:
+			_add_selected_point(pos)
 
 func _on_MiningScreen_game_started() -> void:
 	clear()
@@ -64,10 +77,17 @@ func _random_color() -> int:
 	return randi() % 4 + tiles.YELLOW
 
 func _break_tile(x: int, y: int) -> void:
+	var is_color := _is_tile_color(x, y)
 	for i in range(x - 1, x + 2):
 		for j in range(y - 1, y + 2):
 			_uncover_tile(i, j)
 	_set_tile(x, y, tiles.EMPTY)
+	
+	if is_color:
+		for i in range(x - 1, x + 2):
+			for j in range(y - 1, y + 2):
+				if _can_tile_be_exploded(i, j):
+					_break_tile(i, j)
 
 func _uncover_tile(x: int, y: int):
 	if get_cell(x, y) == tiles.HIDEN:
@@ -86,7 +106,8 @@ func _set_tile(x: int, y: int, v: int) -> void:
 	
 	set_cell(x, y, v)
 	if v < 0:
-		_begin_fall(x, y)
+		_tiles_waiting_for_fall.append({"x": x, "y": y})
+		call_deferred("_trigger_empty_tiles")
 	
 	var changed := false
 	var changed_x: int = 0
@@ -150,7 +171,10 @@ func _tile_pos(pos: Vector2) -> Vector2:
 		pos.x -= TILE_SIZE
 	if pos.y < 0:
 		pos.y -= TILE_SIZE
-	return pos / TILE_SIZE
+	pos /= TILE_SIZE
+	pos.x = int(pos.x)
+	pos.y = int(pos.y)
+	return pos
 
 func _on_BoardCamera_transform_changed(t) -> void:
 	_mouse_transform = t
@@ -161,7 +185,7 @@ func _begin_fall(x: int, y: int, only_down: bool = false) -> bool:
 	var falling_tile_color: int
 	
 	if get_cell(x, y) >= 0 or get_cell(x, y) == tiles.RESERVED:
-		tiles_waiting_for_fall.append({"x": x, "y": y})
+		_tiles_waiting_for_fall.append({"x": x, "y": y})
 		return false
 	
 	if y == 0:
@@ -170,26 +194,22 @@ func _begin_fall(x: int, y: int, only_down: bool = false) -> bool:
 		falling_tile_color = \
 			tiles.YELLOW + randi() % (tiles.BLUE - tiles.YELLOW + 1)
 	else:
-		var cell_above: int =  get_cell(x, y - 1)
-		#I will refactor this abomination later YELLOW <= color => BLUE
-		if cell_above  >= tiles.YELLOW and cell_above <= tiles.BLUE:
+		if _is_tile_color(x, y - 1):
 			falling_tile_x = x
 			falling_tile_y = y - 1
 		elif not only_down:
-			cell_above = get_cell(x - 1, y - 1)
-			if cell_above  >= tiles.YELLOW and cell_above <= tiles.BLUE:
+			if _is_tile_color(x - 1, y - 1):
 				falling_tile_x = x - 1
 				falling_tile_y = y - 1
 			else:
-				cell_above = get_cell(x + 1, y - 1)
-				if cell_above  >= tiles.YELLOW and cell_above <= tiles.BLUE:
+				if _is_tile_color(x + 1, y - 1):
 					falling_tile_x = x + 1
 					falling_tile_y = y - 1
 				else:
-					tiles_waiting_for_fall.append({"x": x, "y": y})
+					_tiles_waiting_for_fall.append({"x": x, "y": y})
 					return false
 		else:
-			tiles_waiting_for_fall.append({"x": x, "y": y})
+			_tiles_waiting_for_fall.append({"x": x, "y": y})
 			return false
 		falling_tile_color = get_cell(falling_tile_x, falling_tile_y)
 		_begin_fall(falling_tile_x, falling_tile_y)
@@ -213,14 +233,65 @@ func _end_fall(data) -> void:
 	call_deferred("_trigger_empty_tiles")
 
 func _trigger_empty_tiles() -> void:
-	var tmp = tiles_waiting_for_fall
-	tiles_waiting_for_fall = []
+	if _tiles_trigered:
+		return
+	_tiles_trigered = true
+	var tmp = _tiles_waiting_for_fall
+	_tiles_waiting_for_fall = []
 	while tmp.size() > 0:
 		var coords = tmp.pop_back()
 		_begin_fall(coords.x, coords.y, true)
 	
-	tmp = tiles_waiting_for_fall
-	tiles_waiting_for_fall = []
+	tmp = _tiles_waiting_for_fall
+	_tiles_waiting_for_fall = []
 	while tmp.size() > 0:
 		var coords = tmp.pop_back()
 		_begin_fall(coords.x, coords.y)
+
+func _is_tile_color(x: int, y: int) -> bool:
+	var tile := get_cell(x, y)
+	return tile >= tiles.YELLOW and tile <= tiles.BLUE
+
+func _add_selected_point(pos: Vector2) -> void:
+	var too_far := false
+	
+	if not _is_tile_color(pos.x, pos.y):
+		return
+	
+	if selected_points.get_point_count() == 0:
+		selected_points.selected_color = get_cellv(pos)
+	else:
+		var last_point = selected_points.get_point_position(
+				selected_points.get_point_count() - 1)
+		if abs(pos.x - last_point.x) > 1 or abs(pos.y - last_point.y) > 1:
+			too_far = true
+		if get_cellv(pos) != selected_points.selected_color:
+			return
+	
+	if selected_point_set.has(pos):
+		while selected_points.get_point_count() > selected_point_set[pos] + 1:
+			var index = selected_points.get_point_count() - 1
+			selected_point_set.erase(selected_points.get_point_position(index))
+			selected_points.remove_point(index)
+		return
+	elif too_far:
+		return
+	
+	selected_point_set[pos] = selected_points.get_point_count()
+	selected_points.add_point(pos)
+
+func _break_selected_tiles() -> void:
+	var index := selected_points.get_point_count() - 1
+	var long_enough := selected_points.get_point_count() >= MIN_CHAIN_LENGTH
+	while index >=  0:
+		var pos = selected_points.get_point_position(index)
+		if long_enough:
+			_break_tile(pos.x, pos.y)
+		selected_points.remove_point(index)
+		index -= 1
+	selected_points.clear_points()
+	selected_point_set.clear()
+
+func _can_tile_be_exploded(x: int, y: int) -> bool:
+	var tile := get_cell(x, y)
+	return tile == tiles.DIRT or tile == tiles.STONE
