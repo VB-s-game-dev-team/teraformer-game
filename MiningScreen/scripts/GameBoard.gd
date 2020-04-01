@@ -36,7 +36,7 @@ var _falling_tile_resource: PackedScene
 var _tiles_waiting_for_fall = []
 var _tiles_trigered := false
 
-var selected_points: Line2D = $SelectedPoints as Line2D
+var selected_points: Line2D
 var selected_point_set := Dictionary()
 
 
@@ -49,7 +49,7 @@ func _ready() -> void:
 	_stone_generator.octaves = 1
 	_stone_generator.period = 5
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_tiles_trigered = false
 
 func _input(event: InputEvent) -> void:
@@ -107,7 +107,7 @@ func _set_tile(x: int, y: int, v: int) -> void:
 	set_cell(x, y, v)
 	if v < 0:
 		_tiles_waiting_for_fall.append({"x": x, "y": y})
-		call_deferred("_trigger_empty_tiles")
+		call_deferred("_trigger_empty_tiles_if_needed")
 	
 	var changed := false
 	var changed_x: int = 0
@@ -179,14 +179,14 @@ func _tile_pos(pos: Vector2) -> Vector2:
 func _on_BoardCamera_transform_changed(t) -> void:
 	_mouse_transform = t
 
-func _begin_fall(x: int, y: int, only_down: bool = false) -> bool:
+func _begin_fall(x: int, y: int, only_down: bool = false):
 	var falling_tile_x: int
 	var falling_tile_y: int
 	var falling_tile_color: int
 	
 	if get_cell(x, y) >= 0 or get_cell(x, y) == tiles.RESERVED:
 		_tiles_waiting_for_fall.append({"x": x, "y": y})
-		return false
+		return
 	
 	if y == 0:
 		falling_tile_x = x
@@ -207,10 +207,10 @@ func _begin_fall(x: int, y: int, only_down: bool = false) -> bool:
 					falling_tile_y = y - 1
 				else:
 					_tiles_waiting_for_fall.append({"x": x, "y": y})
-					return false
+					return
 		else:
 			_tiles_waiting_for_fall.append({"x": x, "y": y})
-			return false
+			return
 		falling_tile_color = get_cell(falling_tile_x, falling_tile_y)
 		_begin_fall(falling_tile_x, falling_tile_y)
 				
@@ -223,19 +223,18 @@ func _begin_fall(x: int, y: int, only_down: bool = false) -> bool:
 		falling_tile_color, \
 		Vector2(falling_tile_x * TILE_SIZE, falling_tile_y * TILE_SIZE), \
 		Vector2(x * TILE_SIZE, y * TILE_SIZE))
-	falling_tile.connect("done", self, "_end_fall")
+	var connect_error := falling_tile.connect("done", self, "_end_fall")
+	if connect_error != 0:
+		print("error with falling tiles for some reason: " + str(connect_error))
 	return true
 
 func _end_fall(data) -> void:
 	_set_tile(data.x, data.y, data.color)
 	remove_child(data.node)
 	data.node.call_deferred("free")
-	call_deferred("_trigger_empty_tiles")
+	call_deferred("_trigger_empty_tiles_if_needed")
 
 func _trigger_empty_tiles() -> void:
-	if _tiles_trigered:
-		return
-	_tiles_trigered = true
 	var tmp = _tiles_waiting_for_fall
 	_tiles_waiting_for_fall = []
 	while tmp.size() > 0:
@@ -255,7 +254,7 @@ func _is_tile_color(x: int, y: int) -> bool:
 func _add_selected_point(pos: Vector2) -> void:
 	var too_far := false
 	
-	if not _is_tile_color(pos.x, pos.y):
+	if not _is_tile_color(int(pos.x), int(pos.y)):
 		return
 	
 	if selected_points.get_point_count() == 0:
@@ -271,6 +270,7 @@ func _add_selected_point(pos: Vector2) -> void:
 	if selected_point_set.has(pos):
 		while selected_points.get_point_count() > selected_point_set[pos] + 1:
 			var index = selected_points.get_point_count() - 1
+			# warning-ignore:return_value_discarded
 			selected_point_set.erase(selected_points.get_point_position(index))
 			selected_points.remove_point(index)
 		return
@@ -295,3 +295,9 @@ func _break_selected_tiles() -> void:
 func _can_tile_be_exploded(x: int, y: int) -> bool:
 	var tile := get_cell(x, y)
 	return tile == tiles.DIRT or tile == tiles.STONE
+
+func _trigger_empty_tiles_if_needed() -> void:
+	if _tiles_trigered:
+		return
+	call_deferred("_trigger_empty_tiles")
+	_tiles_trigered = true

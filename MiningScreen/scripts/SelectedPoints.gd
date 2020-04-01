@@ -18,7 +18,7 @@ func _ready() -> void:
 # quick note to myself:
 #	this is VERY bad, because it gets called on every frame for no good reason
 #   except my laziness -> needs to get refactored later
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if selected_color != -1:
 		if get_point_count() < _board.MIN_CHAIN_LENGTH:
 			default_color = _colors[selected_color] * Color(1, 1, 1, 0.5)
