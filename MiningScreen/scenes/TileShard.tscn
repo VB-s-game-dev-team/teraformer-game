@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MiningScreen/images/tileset.png" type="Texture" id=1]
+
+[node name="TileShard" type="Sprite"]
+position = Vector2( 0.124734, -0.166312 )
+texture = ExtResource( 1 )
+hframes = 7
+region_rect = Rect2( 0, 0, 16, 16 )

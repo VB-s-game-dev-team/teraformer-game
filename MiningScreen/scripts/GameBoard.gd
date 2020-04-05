@@ -3,6 +3,7 @@ extends TileMap
 class_name GameBoard
 
 signal bounds_updated(min_x, max_x, min_y, max_y)
+signal tile_broken(tile, x, y)
 
 enum tiles{
 	RESERVED = -3,
@@ -36,14 +37,14 @@ var _falling_tile_resource: PackedScene
 var _tiles_waiting_for_fall = []
 var _tiles_trigered := false
 
-var selected_points: Line2D
-var selected_point_set := Dictionary()
+var _selected_points: Line2D
+var _selected_point_set := Dictionary()
 
 
 func _ready() -> void:
 	_falling_tile_resource = load("res://MiningScreen/scenes/FallingTile.tscn")
 	
-	selected_points = $SelectedPoints as Line2D
+	_selected_points = $SelectedPoints as Line2D
 	
 	_stone_generator.seed = randi()
 	_stone_generator.octaves = 1
@@ -257,40 +258,40 @@ func _add_selected_point(pos: Vector2) -> void:
 	if not _is_tile_color(int(pos.x), int(pos.y)):
 		return
 	
-	if selected_points.get_point_count() == 0:
-		selected_points.selected_color = get_cellv(pos)
+	if _selected_points.get_point_count() == 0:
+		_selected_points.selected_color = get_cellv(pos)
 	else:
-		var last_point = selected_points.get_point_position(
-				selected_points.get_point_count() - 1)
+		var last_point = _selected_points.get_point_position(
+				_selected_points.get_point_count() - 1)
 		if abs(pos.x - last_point.x) > 1 or abs(pos.y - last_point.y) > 1:
 			too_far = true
-		if get_cellv(pos) != selected_points.selected_color:
+		if get_cellv(pos) != _selected_points.selected_color:
 			return
 	
-	if selected_point_set.has(pos):
-		while selected_points.get_point_count() > selected_point_set[pos] + 1:
-			var index = selected_points.get_point_count() - 1
+	if _selected_point_set.has(pos):
+		while _selected_points.get_point_count() > _selected_point_set[pos] + 1:
+			var index = _selected_points.get_point_count() - 1
 			# warning-ignore:return_value_discarded
-			selected_point_set.erase(selected_points.get_point_position(index))
-			selected_points.remove_point(index)
+			_selected_point_set.erase(_selected_points.get_point_position(index))
+			_selected_points.remove_point(index)
 		return
 	elif too_far:
 		return
 	
-	selected_point_set[pos] = selected_points.get_point_count()
-	selected_points.add_point(pos)
+	_selected_point_set[pos] = _selected_points.get_point_count()
+	_selected_points.add_point(pos)
 
 func _break_selected_tiles() -> void:
-	var index := selected_points.get_point_count() - 1
-	var long_enough := selected_points.get_point_count() >= MIN_CHAIN_LENGTH
+	var index := _selected_points.get_point_count() - 1
+	var long_enough := _selected_points.get_point_count() >= MIN_CHAIN_LENGTH
 	while index >=  0:
-		var pos = selected_points.get_point_position(index)
+		var pos = _selected_points.get_point_position(index)
 		if long_enough:
 			_break_tile(pos.x, pos.y)
-		selected_points.remove_point(index)
+		_selected_points.remove_point(index)
 		index -= 1
-	selected_points.clear_points()
-	selected_point_set.clear()
+	_selected_points.clear_points()
+	_selected_point_set.clear()
 
 func _can_tile_be_exploded(x: int, y: int) -> bool:
 	var tile := get_cell(x, y)
