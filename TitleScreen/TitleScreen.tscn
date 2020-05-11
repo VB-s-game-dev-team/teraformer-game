@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://TitleScreen/scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://TitleScreen/images/particle.png" type="Texture" id=2]
@@ -7,12 +7,7 @@
 [ext_resource path="res://global_graphics/game_theme.tres" type="Theme" id=5]
 [ext_resource path="res://TitleScreen/scenes/ParticleButton.tscn" type="PackedScene" id=6]
 
-
-
-
-
-
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -23,6 +18,90 @@ angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 5.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "EnterAnimation"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Container:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0, 0.9984, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Container:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0, 0.99489, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Container/Title:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -0.75, -0.25, 0, 0, 0.748401, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Container/Title:anchor_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -0.75, -0.25, 0, 0, 0.741379, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Container/ButtonContainer/PlayButton:anchor_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -0.5, -0.25, 0, 0, 0.508932, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Container/ButtonContainer/PlayButton:anchor_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -0.5, -0.25, 0, 0, 0.505422, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Container/ButtonContainer/QuitButton:anchor_left")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -0.25, -0.25, 0, 0, 0.251911, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Container/ButtonContainer/QuitButton:anchor_right")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( -0.25, -0.25, 0, 0, 0.258932, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -60,7 +139,7 @@ visible = false
 amount = 50
 lifetime = 5.0
 visibility_rect = Rect2( -1.2839, -1.52361, 553.72, 104.182 )
-process_material = SubResource( 2 )
+process_material = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Container"]
@@ -92,6 +171,10 @@ margin_top = 120.0
 margin_right = 358.0
 margin_bottom = 176.0
 text = "(test mining screen)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "EnterAnimation"
+anims/EnterAnimation = SubResource( 2 )
 [connection signal="pressed" from="Container/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Container/ButtonContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="Container/ButtonContainer/tmp1" to="." method="_on_tmp1_pressed"]
